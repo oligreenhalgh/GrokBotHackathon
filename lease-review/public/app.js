@@ -1,4 +1,6 @@
 import {PdfPane,getDocument} from './pdf-viewer.js';
+import {renderMap,destroyMap} from './map.js';
+import {renderAnalytics} from './analytics.js';
 
 const $=(s,root=document)=>root.querySelector(s);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -8,7 +10,7 @@ const statusLabels={extracted:'Extracted',placeholder:'Unfilled',optional:'Optio
 const statusTone={extracted:'green',placeholder:'amber',optional:'amber',not_found:'neutral',derived:'blue',needs_review:'red',not_applicable:'neutral',edited:'blue'};
 const categories={office:'Office',retail:'Retail',logistics:'Industrial / logistics','food-and-drink':'Food & drink',supporting:'Supporting'};
 const views={key:{label:'Key terms',ids:['c01','c02','c03','c14','c35','c37','c19','c24','c51','c54']},all:{label:'All columns'},unit:{label:'Unit information',from:1,to:13},term:{label:'Lease term',from:14,to:24},rent:{label:'Rent & incentives',from:25,to:44},obligations:{label:'Obligations',from:45,to:56}};
-let workspace,section='register',view='key',search='',category='',status='',sort={id:'c01',dir:1},selected=null,pdfPane=null,evidenceIndex=0,editing=false,toastTimeout;
+let workspace,section='map',view='key',search='',category='',status='',sort={id:'c01',dir:1},selected=null,pdfPane=null,evidenceIndex=0,editing=false,toastTimeout;
 const key=(r,c)=>`${r}:${c}`;
 function effective(row,col){const original=row.cells[col]||{value:null,status:'not_found',explanation:'No extraction supplied.',evidence:[]};const override=workspace.state.overrides?.[key(row.id,col)];return {...original,...(override?{value:override.value,status:'edited',note:override.note,originalStatus:original.status}:{}),reviewed:!!workspace.state.reviews?.[key(row.id,col)]};}
 function display(cell){if(cell.value!==null&&cell.value!==undefined&&cell.value!=='')return typeof cell.value==='boolean'?(cell.value?'Yes':'No'):typeof cell.value==='number'?cell.value.toLocaleString('en-GB',{maximumFractionDigits:2}):String(cell.value);return ({placeholder:'Unfilled',optional:'Not selected',not_applicable:'N/A',not_found:'—',needs_review:'Review needed'})[cell.status]||'—';}
@@ -20,12 +22,14 @@ function filteredRows(){let rows=workspace.rows.filter(r=>(!category||r.category
 function visibleColumns(){const v=views[view];return workspace.columns.filter(c=>v.ids?v.ids.includes(c.id):v.from?c.index>=v.from&&c.index<=v.to:true);}
 function pendingCells(){return workspace.rows.flatMap(r=>workspace.columns.filter(c=>['optional','needs_review','derived'].includes(effective(r,c.id).status)&&c.id!=='c01'&&!effective(r,c.id).reviewed).map(c=>({r,c,cell:effective(r,c.id)})));}
 function render(){
-  $('#app').innerHTML=`<div class="shell"><header class="app-header"><a href="/" class="brand" aria-label="Folio home">Folio</a><nav class="main-nav" aria-label="Main navigation">${[['register','Lease register'],['documents','Documents'],['review','Review'],['activity','Activity']].map(([id,label])=>`<button class="nav-button ${section===id?'active':''}" data-nav="${id}">${label}</button>`).join('')}</nav><button class="collection-button" id="collection-details" title="About this collection">Synthetic portfolio ${icon('info')}</button></header><main class="main"><div class="content" id="content"></div></main></div>`;
+  destroyMap();
+  $('#app').innerHTML=`<div class="shell"><header class="app-header"><a href="/" class="brand" aria-label="Folio home">Folio</a><nav class="main-nav" aria-label="Main navigation">${[['map','Map'],['register','Lease register'],['analytics','Analytics'],['documents','Documents'],['review','Review'],['activity','Activity']].map(([id,label])=>`<button class="nav-button ${section===id?'active':''}" data-nav="${id}">${label}</button>`).join('')}</nav><button class="collection-button" id="collection-details" title="About this collection">Synthetic portfolio ${icon('info')}</button></header><main class="main"><div class="content" id="content"></div></main></div>`;
   $('[data-nav="'+section+'"]')?.setAttribute('aria-current','page');
   document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{section=b.dataset.nav;search='';category='';status='';closePanel();render();});
   $('#collection-details').onclick=collectionDetails;
-  if(section==='register')renderRegister();if(section==='documents')renderDocuments();if(section==='review')renderReview();if(section==='activity')renderActivity();
+  if(section==='map'){$('#content').classList.add('map-content');renderMap(viewContext(),$('#content'));}if(section==='analytics')renderAnalytics(viewContext(),$('#content'));if(section==='register')renderRegister();if(section==='documents')renderDocuments();if(section==='review')renderReview();if(section==='activity')renderActivity();
 }
+function viewContext(){return {workspace,effective,display,badge,icon,escape,statusLabels,selectCell,closePanel,goToRegister:lease=>{section='register';search=lease?.tenant||'';category='';status='';closePanel();render();}};}
 function heading(title,actions=''){return `<div class="page-heading"><h1>${title}</h1><div class="actions">${actions}</div></div>`;}
 function exportButton(){return `<a class="button primary" href="/api/export.xlsx" download>${icon('download')} Export</a>`;}
 function renderRegister(){
