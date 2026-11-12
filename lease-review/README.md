@@ -44,7 +44,7 @@ needed for **new DOCX uploads**. Scanned image-only PDFs need OCR before text ev
 - Switch between key terms, all 56 columns and grouped views. Search, filter and sort the register.
 - **Edit value** preserves the original extraction and evidence. **Restore extraction** removes a correction.
 - **Mark reviewed** records a review decision. Activity records local changes.
-- **Export workbook** includes all 56 fields plus source evidence and review details. Unknown amounts stay blank; zero remains numeric zero.
+- **Export** includes all 56 fields plus source evidence and review details. Unknown amounts stay blank; zero remains numeric zero.
 - **Add documents** indexes PDF/DOCX files up to 20 MB. New files stay **Awaiting extraction** until structured results are imported.
 
 The initial extraction was prepared by Codex. This version does not call Grok or any model API.
