@@ -57,7 +57,7 @@ export async function exportWorkbook(workspace, outputPath, { previewDir } = {})
   base(sheet, lastRow, columns.length);
   sheet.properties.tabColor = color('#741F34');
   width(sheet, 1, columns.length, 20);
-  sheet.getCell('A2').value = 'Role Model · Lease register';
+  sheet.getCell('A2').value = 'Roll Model · Lease register';
   sheet.getCell('A2').font = { name: 'Helvetica', size: 15, bold: true };
   sheet.getCell('A3').value = 'Source-linked lease register. Blank values remain unknown. Review decisions and source passages are on Source evidence.';
   sheet.getCell('A3').font = { name: 'Helvetica', size: 10, italic: true, color: color('#64716B') };

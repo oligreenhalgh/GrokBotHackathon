@@ -310,7 +310,7 @@ async function recordEmailProvenance(documentId, provenance, duplicate, guard) {
 }
 function oauthPage(res, status, heading, message) {
   const escape = text => String(text).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Role Model · Gmail</title><style>body{font:16px Helvetica,Arial,sans-serif;color:#30272a;max-width:560px;margin:14vh auto;padding:24px;line-height:1.6}h1{font-size:25px;color:#741f34}a{color:#741f34}</style></head><body><h1>${escape(heading)}</h1><p>${escape(message)}</p><p>You can close this tab and return to Role Model.</p><a href="/">Open Role Model</a></body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Roll Model · Gmail</title><style>body{font:16px Helvetica,Arial,sans-serif;color:#30272a;max-width:560px;margin:14vh auto;padding:24px;line-height:1.6}h1{font-size:25px;color:#741f34}a{color:#741f34}</style></head><body><h1>${escape(heading)}</h1><p>${escape(message)}</p><p>You can close this tab and return to Roll Model.</p><a href="/">Open Roll Model</a></body></html>`;
   res.writeHead(status, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer', 'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'" });
   res.end(html);
 }
@@ -389,9 +389,9 @@ const server = http.createServer(async (req, res) => {
       try {
         const result = await gmail.callback(url.searchParams, req.headers.cookie || '');
         res.setHeader('Set-Cookie', result.cookie);
-        return oauthPage(res, 200, 'Gmail connected', 'Role Model can now list document attachments with read-only access. Choose an attachment in the Email tab to add it to the register.');
+        return oauthPage(res, 200, 'Gmail connected', 'Roll Model can now list document attachments with read-only access. Choose an attachment in the Email tab to add it to the register.');
       } catch (error) {
-        const safe = error instanceof GmailError ? error : new GmailError('connection_failed', 'Gmail sign-in could not be completed. Return to Role Model and try again.', 502);
+        const safe = error instanceof GmailError ? error : new GmailError('connection_failed', 'Gmail sign-in could not be completed. Return to Roll Model and try again.', 502);
         return oauthPage(res, safe.status, 'Gmail was not connected', safe.message);
       }
     }
@@ -513,7 +513,7 @@ const server = http.createServer(async (req, res) => {
       const exportPath = path.join(STORAGE, 'exports', `lease-review-${randomUUID()}.xlsx`);
       await exportWorkbook(await workspace(), exportPath);
       const bytes = await fs.readFile(exportPath);
-      res.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="role-model.xlsx"', 'Content-Length': bytes.length, 'Cache-Control': 'no-store' });
+      res.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="roll-model.xlsx"', 'Content-Length': bytes.length, 'Cache-Control': 'no-store' });
       res.end(bytes);
       await fs.unlink(exportPath).catch(() => {});
       return;
@@ -532,5 +532,5 @@ const server = http.createServer(async (req, res) => {
     json(res, error.status || 500, { error: error.message || 'Unexpected server error.', ...(error instanceof GmailError ? { code: error.code, retryable: error.retryable } : {}) });
   }
 });
-server.listen(PORT, HOST, () => console.log(`Role Model: http://${HOST}:${PORT}`));
+server.listen(PORT, HOST, () => console.log(`Roll Model: http://${HOST}:${PORT}`));
 server.on('error', error => { console.error(error.message); process.exitCode = 1; });

@@ -1,4 +1,4 @@
-# Role Model — lease review
+# Roll Model — lease review
 
 A local spreadsheet-style lease register with a source document behind each extracted field. The initial collection is **10 synthetic leases and 10 related documents, covering 765 PDF pages**. Astra prepared the initial 56-column register. New uploaded documents are extracted with the Claude Fable API.
 
@@ -90,16 +90,16 @@ The new **Email** tab connects directly to Gmail with Google OAuth. It is separa
 ### One-time Google setup
 
 1. In a [Google Cloud project](https://console.cloud.google.com/apis/library/gmail.googleapis.com), enable the **Gmail API**.
-2. Configure [Google Auth platform](https://console.cloud.google.com/auth/branding) with app name **Role Model**. For personal Gmail, choose **External**, keep **Testing**, and add your Gmail address as a test user under **Audience**.
+2. Configure [Google Auth platform](https://console.cloud.google.com/auth/branding) with app name **Roll Model**. For personal Gmail, choose **External**, keep **Testing**, and add your Gmail address as a test user under **Audience**.
 3. Under **Data Access**, add `https://www.googleapis.com/auth/gmail.readonly`.
 4. Under **Clients**, create a **Desktop app** OAuth client and download its JSON file.
-5. In Role Model → **Email**, choose that JSON file, then **Connect Gmail**. Complete sign-in in the system browser that opens. The local callback returns to `http://127.0.0.1:4173/api/email/callback`.
+5. In Roll Model → **Email**, choose that JSON file, then **Connect Gmail**. Complete sign-in in the system browser that opens. The local callback returns to `http://127.0.0.1:4173/api/email/callback`.
 
 The client file and tokens stay in ignored `storage/gmail/`, with private file permissions. They are not served to the frontend or committed to Git. Google grants read-only mailbox access; this app implements no sending, deletion or modification of Gmail messages. Google's testing-mode authorizations expire after seven days, so reconnect when prompted. Organization policies may restrict access. [Google setup guide](https://developers.google.com/workspace/guides/configure-oauth-consent), [testing restrictions](https://support.google.com/cloud/answer/15549945).
 
 ### Choose documents from mail
 
-After connecting, Role Model lists messages from the last 90 days with PDF/DOCX attachments. It checks for new mail once a minute while the Email tab is open and also offers Refresh and pagination. Listing requests only message headers and attachment descriptors; it does not send messages or attachments to Fable.
+After connecting, Roll Model lists messages from the last 90 days with PDF/DOCX attachments. It checks for new mail once a minute while the Email tab is open and also offers Refresh and pagination. Listing requests only message headers and attachment descriptors; it does not send messages or attachments to Fable.
 
 Click **Add to register** on an attachment to download that specific file, save its email provenance, and run the normal Fable workflow. Full leases create register rows; supporting documents retain their findings for review. Identical files are deduplicated across uploads and email imports. Added documents remain available after Gmail is disconnected.
 

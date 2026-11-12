@@ -160,9 +160,9 @@ export class GmailClient {
   }
   authorize(ticket) {
     const handoff = this.handoffs.get(ticket); this.handoffs.delete(ticket);
-    if (!handoff || handoff.expiresAt <= this.now()) throw new GmailError('expired_signin', 'This sign-in link expired or was already used. Return to Role Model and connect again.', 400);
+    if (!handoff || handoff.expiresAt <= this.now()) throw new GmailError('expired_signin', 'This sign-in link expired or was already used. Return to Roll Model and connect again.', 400);
     const attempt = this.pending.get(handoff.state);
-    if (!attempt || attempt.generation !== this.generation) throw new GmailError('expired_signin', 'The Gmail setup changed. Return to Role Model and connect again.', 400);
+    if (!attempt || attempt.generation !== this.generation) throw new GmailError('expired_signin', 'The Gmail setup changed. Return to Roll Model and connect again.', 400);
     return { authUrl: attempt.authUrl, cookie: cookie(handoff.browser) };
   }
   async request(url, options = {}, limit = 6 * 1024 * 1024) {
@@ -185,7 +185,7 @@ export class GmailClient {
   async callback(params, cookieHeader) {
     const state = params.get('state'); const attempt = this.pending.get(state);
     if (!attempt || !scalarString(state, 200) || attempt.expiresAt <= this.now() || attempt.generation !== this.generation || !equal(attempt.browserHash, digest(browserCookie(cookieHeader)))) {
-      throw new GmailError('invalid_state', 'This sign-in could not be matched to this browser, or it expired. Return to Role Model and connect again.', 400);
+      throw new GmailError('invalid_state', 'This sign-in could not be matched to this browser, or it expired. Return to Roll Model and connect again.', 400);
     }
     this.pending.delete(state);
     for (const [ticket, handoff] of this.handoffs) if (handoff.state === state) this.handoffs.delete(ticket);
