@@ -2,11 +2,13 @@
 """Local lease inbox: store lease PDFs in a folder and log them for parsing.
 
 Everything stays on this machine. PDFs go to ./storage/ and each one gets a row
-in ./lease_inbox.sqlite with status `received`. The parser picks up those rows.
+in ./lease_inbox.sqlite with status `received`. Each stored PDF is then handed to the
+Folio dashboard (../lease-review), where it appears in the document library.
 
     python3 lease_inbox.py store lease.pdf --sender a@b.com --subject "Unit 4"
     python3 lease_inbox.py serve            # http://127.0.0.1:8765
     python3 lease_inbox.py list
+    python3 lease_inbox.py forward          # send anything Folio has not had yet
 
 Standard library only.
 """
@@ -14,6 +16,7 @@ Standard library only.
 from __future__ import annotations
 
 import argparse
+import base64
 import datetime as dt
 import hashlib
 import json
@@ -21,6 +24,8 @@ import os
 import re
 import sqlite3
 import sys
+import urllib.error
+import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import unquote, urlparse
 
@@ -28,6 +33,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STORAGE = os.environ.get("LEASE_INBOX_STORAGE", os.path.join(HERE, "storage"))
 DB_PATH = os.environ.get("LEASE_INBOX_DB", os.path.join(HERE, "lease_inbox.sqlite"))
 MAX_BYTES = 25 * 1024 * 1024
+# Where the Folio dashboard listens. Set FOLIO_URL to an empty string to switch the hand-off off.
+FOLIO_URL = os.environ.get("FOLIO_URL", "http://127.0.0.1:4173").rstrip("/")
+FOLIO_MAX_BYTES = 20 * 1024 * 1024  # Folio's own upload limit
 STATUSES = ("received", "parsing", "parsed", "failed")
 
 SCHEMA = """
@@ -55,6 +63,10 @@ def db() -> sqlite3.Connection:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.executescript(SCHEMA)
+    # Added after the first release: which Folio document this PDF became.
+    columns = {row["name"] for row in conn.execute("pragma table_info(lease_documents)")}
+    if "folio_id" not in columns:
+        conn.execute("alter table lease_documents add column folio_id text")
     return conn
 
 
@@ -109,9 +121,69 @@ def store(data: bytes, filename: str, *, sender: str | None = None,
             (source, sender, subject, message_id,
              received_at or now.isoformat(timespec="seconds"),
              filename, rel_path, sha256, len(data), now.isoformat(timespec="seconds")))
-        return {"result": "stored", "id": cur.lastrowid, "status": "received",
-                "filename": filename, "storage_path": rel_path, "sha256": sha256,
-                "size_bytes": len(data)}
+        result = {"result": "stored", "id": cur.lastrowid, "status": "received",
+                  "filename": filename, "storage_path": rel_path, "sha256": sha256,
+                  "size_bytes": len(data)}
+    # Hand over outside the transaction: the lease is safely stored whatever Folio does.
+    result["folio"] = forward_to_folio(result["id"])
+    return result
+
+
+def forward_to_folio(doc_id: int) -> dict:
+    """Send one stored PDF to the Folio dashboard. Never raises: a failure is recorded and returned."""
+    if not FOLIO_URL:
+        return {"sent": False, "reason": "hand-off is switched off"}
+    with db() as conn:
+        row = conn.execute("select * from lease_documents where id = ?", (doc_id,)).fetchone()
+    if row is None:
+        return {"sent": False, "reason": "no such document"}
+    if row["folio_id"]:
+        return {"sent": True, "folio_id": row["folio_id"], "already": True}
+
+    def fail(reason: str) -> dict:
+        with db() as conn:
+            conn.execute("update lease_documents set error = ? where id = ?",
+                         (f"Folio hand-off: {reason}", doc_id))
+        return {"sent": False, "reason": reason}
+
+    try:
+        with open(os.path.join(STORAGE, row["storage_path"]), "rb") as fh:
+            data = fh.read()
+    except OSError as err:
+        return fail(f"cannot read stored file: {err}")
+    if len(data) > FOLIO_MAX_BYTES:
+        return fail(f"file is {len(data)} bytes, over Folio's {FOLIO_MAX_BYTES} byte limit")
+
+    body = json.dumps({"name": row["filename"],
+                       "base64": base64.b64encode(data).decode("ascii")}).encode()
+    req = urllib.request.Request(f"{FOLIO_URL}/api/upload", data=body, method="POST",
+                                 headers={"Content-Type": "application/json"})
+    try:
+        # Folio indexes every page before it answers, so allow for a long document.
+        with urllib.request.urlopen(req, timeout=180) as resp:
+            reply = json.loads(resp.read())
+    except urllib.error.HTTPError as err:
+        detail = err.read().decode("utf-8", "replace")[:200]
+        return fail(f"Folio answered {err.code}: {detail}")
+    except (urllib.error.URLError, OSError, ValueError) as err:
+        return fail(f"Folio is not reachable at {FOLIO_URL} ({err})")
+
+    folio_id = (reply.get("document") or {}).get("id")
+    if not folio_id:
+        return fail("Folio accepted the file but returned no document id")
+    with db() as conn:
+        conn.execute("update lease_documents set folio_id = ?, error = null where id = ?",
+                     (folio_id, doc_id))
+    return {"sent": True, "folio_id": folio_id,
+            "pages": (reply.get("document") or {}).get("pageCount")}
+
+
+def forward_pending() -> list[dict]:
+    """Send every stored PDF that Folio has not had yet."""
+    with db() as conn:
+        ids = [row["id"] for row in conn.execute(
+            "select id from lease_documents where folio_id is null order by id")]
+    return [{"id": doc_id, **forward_to_folio(doc_id)} for doc_id in ids]
 
 
 def list_documents(status: str | None = None) -> list[dict]:
@@ -199,6 +271,8 @@ def main() -> int:
     p = sub.add_parser("list", help="list stored documents")
     p.add_argument("--status", choices=STATUSES)
 
+    sub.add_parser("forward", help="send stored PDFs that Folio has not had yet")
+
     p = sub.add_parser("mark", help="set a document's status (for the parser)")
     p.add_argument("id", type=int)
     p.add_argument("status", choices=STATUSES)
@@ -231,6 +305,11 @@ def main() -> int:
     if args.command == "list":
         print(json.dumps(list_documents(args.status), indent=2))
         return 0
+
+    if args.command == "forward":
+        results = forward_pending()
+        print(json.dumps(results, indent=2))
+        return 0 if all(r["sent"] for r in results) else 1
 
     if args.command == "mark":
         ok = set_status(args.id, args.status, args.error)

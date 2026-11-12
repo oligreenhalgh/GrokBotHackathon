@@ -7,9 +7,19 @@ Everything runs on one machine. No cloud account is needed.
 email with PDF -> Grok Bot inbox -> routine -> POST /leases -> lease_inbox.py
                                                                  |-> storage/YYYY/MM/DD/<hash>-<name>.pdf
                                                                  |-> lease_inbox.sqlite  (status: received)
-                                                                          |
-                                                                       parser
+                                                                 |-> Folio dashboard     (document library)
 ```
+
+## Into the dashboard
+
+Each stored PDF is handed straight to the Folio dashboard in `../lease-review`, where it
+appears in the document library as "Awaiting extraction". Folio must be running
+(`npm start` in `lease-review`, with its Python environment set up as its README describes).
+
+- If Folio is down, the lease is still stored. Send it on later with `python3 lease_inbox.py forward`.
+- Each row records Folio's document id in `folio_id`, so nothing is sent twice.
+- Folio takes files up to 20 MB. A larger PDF stays in the inbox with the reason in `error`.
+- `FOLIO_URL` sets where Folio listens (default `http://127.0.0.1:4173`). Set it empty to switch the hand-off off.
 
 ## Run it
 
