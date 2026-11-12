@@ -114,7 +114,7 @@ function list() {
   const cities = [...new Set(shown.map(l => l.city || 'No location'))].sort();
   const uses = [...new Set(leases.map(l => l.use))].sort();
   return `<div class="rail-head"><div class="eyebrow">Portfolio</div><h2>${shown.length} lease${shown.length === 1 ? '' : 's'} · ${new Set(shown.map(l => l.buildingKey)).size} buildings</h2></div>
-  <div class="rail-stats">${stat('Passing rent', moneyShort(rent), `${confirmed.length} of ${shown.length} confirmed`)}${stat('WAULT to break', years(wault(shown, 'toBreak')))}${stat('WAULT to expiry', years(wault(shown, 'toExpiry')))}</div>
+  <div class="rail-stats">${stat('Passing rent', moneyShort(rent), `${confirmed.length} of ${shown.length} confirmed`)}${stat('WAULT', years(wault(shown, 'toExpiry')))}${stat('WAULB', years(wault(shown, 'toBreak')))}</div>
   <div class="rail-controls"><label class="search">${icon('search')}<input id="map-search" placeholder="Search tenant, address or city" value="${escape(query)}" aria-label="Search leases on the map"></label><div class="segmented" role="group" aria-label="Filter by use"><button class="${!useFilter ? 'active' : ''}" data-use="">All</button>${uses.map(u => `<button class="${useFilter === u ? 'active' : ''}" data-use="${escape(u)}">${escape(u)}</button>`).join('')}</div></div>
   <div class="rail-list">${cities.map(city => {
     const inCity = shown.filter(l => (l.city || 'No location') === city).sort((a, b) => (b.rent || 0) - (a.rent || 0));

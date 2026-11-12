@@ -11,7 +11,7 @@ const number = v => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 const POSTCODE = /([A-Z]{1,2}\d[A-Z\d]?) ?(\d[A-Z]{2})\b/i;
 
 export const money = v => (v == null ? '—' : `£${Math.round(v).toLocaleString('en-GB')}`);
-export const moneyShort = v => (v == null ? '—' : v >= 1e6 ? `£${(v / 1e6).toFixed(2)}m` : v >= 1e3 ? `£${(v / 1e3).toFixed(1)}k` : `£${Math.round(v)}`);
+export const moneyShort = v => (v == null ? '—' : v >= 1e6 ? `£${(v / 1e6).toFixed(1).replace(/\.0$/, '')}m` : v >= 1e3 ? `£${Math.round(v / 1e3)}k` : `£${Math.round(v)}`);
 export const fmtDate = d => (d ? d.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'}) : '—');
 export const years = v => (v == null ? '—' : `${v.toFixed(1)} yrs`);
 
