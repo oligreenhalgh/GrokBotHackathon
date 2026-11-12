@@ -1,0 +1,11 @@
+.env
+*.env
+!.env.example
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+# Partner data stays out of the repo (Cortile and MSCI terms).
+data/
+*.sqlite
+storage/
