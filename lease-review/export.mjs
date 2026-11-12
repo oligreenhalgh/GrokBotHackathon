@@ -17,16 +17,16 @@ function base(sheet, rowCount, columnCount) {
     sheet.getRow(r).height = 25;
     for (let c = 1; c <= columnCount; c++) {
       const cell = sheet.getCell(r, c);
-      cell.font = { name: 'Arial', size: 10, color: color('#26333B') };
+      cell.font = { name: 'Helvetica', size: 10, color: color('#26333B') };
       cell.alignment = { vertical: 'middle' };
     }
   }
 }
-function band(sheet, row, startColumn, endColumn, background = '#244536', foreground = '#FFFFFF') {
+function band(sheet, row, startColumn, endColumn, background = '#741F34', foreground = '#FFFFFF') {
   for (let c = startColumn; c <= endColumn; c++) {
     const cell = sheet.getCell(row, c);
     cell.fill = fill(background);
-    cell.font = { name: 'Arial', size: 10, bold: true, color: color(foreground) };
+    cell.font = { name: 'Helvetica', size: 10, bold: true, color: color(foreground) };
     cell.alignment = { wrapText: true, vertical: 'middle', horizontal: 'center' };
   }
 }
@@ -55,16 +55,16 @@ export async function exportWorkbook(workspace, outputPath, { previewDir } = {})
   const sources = workbook.addWorksheet('Source evidence');
   const lastRow = Math.max(rows.length + 6, 7);
   base(sheet, lastRow, columns.length);
-  sheet.properties.tabColor = color('#244536');
+  sheet.properties.tabColor = color('#741F34');
   width(sheet, 1, columns.length, 20);
   sheet.getCell('A2').value = 'Lease review';
-  sheet.getCell('A2').font = { name: 'Arial', size: 15, bold: true };
-  sheet.getCell('A3').value = 'Prepared template extraction. Blank values remain unknown. Review decisions and source passages are on Source evidence.';
-  sheet.getCell('A3').font = { name: 'Arial', size: 10, italic: true, color: color('#64716B') };
-  mergedGroups(sheet, 4, columns, 'section', '#244536');
-  mergedGroups(sheet, 5, columns, 'group', '#456452');
+  sheet.getCell('A2').font = { name: 'Helvetica', size: 15, bold: true };
+  sheet.getCell('A3').value = 'Source-linked lease register. Blank values remain unknown. Review decisions and source passages are on Source evidence.';
+  sheet.getCell('A3').font = { name: 'Helvetica', size: 10, italic: true, color: color('#64716B') };
+  mergedGroups(sheet, 4, columns, 'section', '#741F34');
+  mergedGroups(sheet, 5, columns, 'group', '#945266');
   sheet.getRow(6).values = columns.map(c => c.label);
-  band(sheet, 6, 1, columns.length, '#E7EDE7', '#223B2D');
+  band(sheet, 6, 1, columns.length, '#F5EDEF', '#581327');
   sheet.getRow(6).height = 42;
   const numericColumns = new Set(['c01','c07','c10','c22','c23','c34','c35','c36','c40','c41','c43','c44','c45','c46','c47','c48','c49','c50']);
   for (let r = 7; r <= lastRow; r++) {
@@ -83,7 +83,7 @@ export async function exportWorkbook(workspace, outputPath, { previewDir } = {})
     if (Object.hasOwn(state.overrides || {}, key)) cell.fill = fill('#E7EEFA');
     else if (state.reviews?.[key]) cell.fill = fill('#EDF3EC');
     else if (['placeholder','optional','needs_review'].includes(status)) cell.fill = fill('#FFF5DD');
-    else if (r % 2) cell.fill = fill('#F6F8F6');
+    else if (r % 2) cell.fill = fill('#FCF9FA');
   }));
   width(sheet, 1, 1, 7); width(sheet, 2, 2, 18); width(sheet, 3, 6, 26);
   width(sheet, 9, 9, 40); width(sheet, 55, 56, 42);
@@ -107,9 +107,9 @@ export async function exportWorkbook(workspace, outputPath, { previewDir } = {})
   const evidenceLast = Math.max(5, evidenceRows.length + 4);
   base(sources, evidenceLast, headers.length);
   sources.getCell('A2').value = 'Source evidence and review decisions';
-  sources.getCell('A2').font = { name: 'Arial', size: 15, bold: true };
+  sources.getCell('A2').font = { name: 'Helvetica', size: 15, bold: true };
   sources.getCell('A3').value = 'One line per field and source passage. Extracted values are preserved alongside any reviewer overrides.';
-  sources.getCell('A3').font = { name: 'Arial', size: 10, italic: true, color: color('#64716B') };
+  sources.getCell('A3').font = { name: 'Helvetica', size: 10, italic: true, color: color('#64716B') };
   sources.getRow(4).values = headers;
   band(sources, 4, 1, headers.length);
   sources.getRow(4).height = 30;

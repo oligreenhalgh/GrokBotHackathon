@@ -3,11 +3,14 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { createReadStream, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { randomUUID } from 'node:crypto';
+import { randomUUID, createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
+import { extractWithFable, FABLE_MODEL, ExtractionError } from './fable-extractor.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.join(ROOT, 'public');
+try { process.loadEnvFile(path.join(ROOT, '.env')); }
+catch (error) { if (error.code !== 'ENOENT') throw new Error('Could not load the server-side .env configuration.'); }
 const STORAGE = process.env.LEASE_STORAGE_DIR ? path.resolve(process.env.LEASE_STORAGE_DIR) : path.join(ROOT, 'storage');
 const UPLOADS = path.join(STORAGE, 'uploads');
 const PORT = Number(process.env.PORT || 4173);
@@ -15,7 +18,11 @@ const HOST = '127.0.0.1';
 const VENV_PYTHON = path.join(ROOT, '.venv', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
 const PYTHON = process.env.LEASE_PYTHON || (existsSync(VENV_PYTHON) ? VENV_PYTHON : process.platform === 'win32' ? 'python' : 'python3');
 const STATUSES = new Set(['extracted', 'placeholder', 'optional', 'not_found', 'derived', 'needs_review', 'not_applicable']);
-const provider = { id: 'prepared', label: 'Prepared extraction', live: false };
+function providerInfo() {
+  const configured = Boolean(process.env.ANTHROPIC_API_KEY?.trim());
+  return { id: 'astra', label: 'Astra · initial collection', live: false,
+    upload: { id: 'fable', label: 'Claude Fable 5.2', model: FABLE_MODEL, configured, live: configured } };
+}
 await fs.mkdir(UPLOADS, { recursive: true });
 let index = await readJson(path.join(PUBLIC, 'data/document-index.json'), { documents: [] });
 let uploadMetadata = await readJson(path.join(STORAGE, 'uploads.json'), []);
@@ -23,6 +30,9 @@ let state = await readJson(path.join(STORAGE, 'state.json'), { reviews: {}, over
 let imports = await readJson(path.join(STORAGE, 'imported-rows.json'), []);
 let mutationQueue = Promise.resolve();
 const uploadCache = new Map();
+const uploadInFlight = new Map();
+const extractionJobs = new Map();
+const COMPLETED_EXTRACTIONS = new Set(['extracted', 'supporting_extracted', 'extraction_imported', 'document_review_required', 'unrelated_document']);
 
 async function readJson(file, fallback) {
   try { return JSON.parse(await fs.readFile(file, 'utf8')); }
@@ -46,7 +56,7 @@ async function workspace() {
   const columns = columnsFrom(await readJson(path.join(PUBLIC, 'data/columns.json'), []));
   const extraction = await readJson(path.join(PUBLIC, 'data/extraction.json'), { rows: [] });
   const rows = [...(Array.isArray(extraction) ? extraction : extraction.rows || []), ...imports];
-  return { columns, rows, documents: [...index.documents.map(metadata), ...uploadMetadata], state, provider };
+  return { columns, rows, documents: [...index.documents.map(metadata), ...uploadMetadata], state, provider: providerInfo() };
 }
 async function documentById(id) {
   const prepared = index.documents.find(x => x.id === id);
@@ -131,9 +141,139 @@ async function validateImport(payload, current) {
   return result;
 }
 
+async function updateUpload(id, patch, auditType) {
+  const existing = uploadMetadata.find(x => x.id === id);
+  if (!existing) fail(404, 'Uploaded document not found.');
+  const updated = { ...existing, ...patch };
+  const nextUploads = uploadMetadata.map(x => x.id === id ? updated : x);
+  await atomicJson(path.join(STORAGE, 'uploads.json'), nextUploads); uploadMetadata = nextUploads;
+  if (auditType) {
+    const next = structuredClone(state);
+    next.audit.push({ id: randomUUID(), type: auditType, documentId: id, at: new Date().toISOString(), status: updated.status });
+    await atomicJson(path.join(STORAGE, 'state.json'), next); state = next;
+  }
+  return updated;
+}
+function uploadedRows(id) { return imports.filter(row => row.documentId === id); }
+function extractionResponse(document, duplicate = false) {
+  return { document, status: document.status, rows: uploadedRows(document.id), duplicate,
+    message: document.status === 'extracting' ? 'Document stored and indexed. Fable extraction is running.' :
+      document.status === 'awaiting_configuration' ? 'Document stored and indexed. Configure the server-side Anthropic key, then retry extraction.' :
+      document.status === 'needs_ocr' ? 'Document stored. OCR is required before source quotes can be verified.' :
+      document.status === 'extraction_failed' ? 'The source is retained. Review the extraction error and retry explicitly.' :
+      document.status === 'supporting_extracted' ? 'Supporting findings extracted; no existing lease terms were changed.' :
+      document.status === 'extracted' ? 'Lease rows extracted and source quotes checked.' :
+      document.status === 'document_review_required' ? 'The document needs review before a full lease row can be created.' :
+      'Document is available in the library.' };
+}
+async function completeExtraction(id, result) {
+  const existingIds = new Set(imports.map(row => row.id));
+  const baseline = await readJson(path.join(PUBLIC, 'data/extraction.json'), { rows: [] });
+  const baselineRows = Array.isArray(baseline) ? baseline : baseline.rows || [];
+  for (const row of baselineRows) existingIds.add(row.id);
+  const matching = imports.filter(row => row.documentId === id);
+  if (matching.some(row => !result.rows.some(candidate => candidate.id === row.id))) {
+    throw new ExtractionError('existing_rows', 'This document already has imported rows. Review them before running another extraction.', false);
+  }
+  const nextRows = result.rows.filter(row => !existingIds.has(row.id));
+  for (let i = 0; i < nextRows.length; i++) {
+    nextRows[i].cells.c01 = { value: baselineRows.length + imports.length + i + 1, status: 'derived', explanation: 'Assigned register row number; not a source-document fact.', evidence: [] };
+  }
+  const nextImports = [...imports, ...nextRows];
+  await atomicJson(path.join(STORAGE, 'imported-rows.json'), nextImports); imports = nextImports;
+  const previous = uploadMetadata.find(x => x.id === id);
+  const status = result.kind === 'lease' ? 'extracted' : result.kind === 'supporting' ? 'supporting_extracted' : result.kind === 'unrelated' ? 'unrelated_document' : 'document_review_required';
+  return updateUpload(id, { title: result.title, category: result.category, kind: result.kind === 'lease' ? 'lease' : 'supporting-document', status,
+    analysis: result.analysis,
+    extraction: { ...previous.extraction, provider: 'fable', model: FABLE_MODEL, completedAt: result.completedAt,
+      elapsedMs: result.elapsedMs, usage: result.usage, inputMode: result.inputMode, requestId: result.requestId,
+      rowIds: result.rows.map(row => row.id), validationIssues: result.validationIssues, error: null } }, 'extraction_completed');
+}
+async function runExtraction(id) {
+  const started = Date.now();
+  try {
+    const document = await documentById(id);
+    const columns = columnsFrom(await readJson(path.join(PUBLIC, 'data/columns.json'), []));
+    const result = { ...await extractWithFable({ document, columns, pdfPath: path.join(UPLOADS, id, 'document.pdf') }),
+      completedAt: new Date().toISOString(), elapsedMs: Date.now() - started };
+    // Keep the validated result before importing rows so a restart can recover without another paid call.
+    await atomicJson(path.join(UPLOADS, id, 'extraction-result.json'), result);
+    await mutate(() => completeExtraction(id, result));
+  } catch (error) {
+    const safe = error instanceof ExtractionError ? error : new ExtractionError('processing_error', 'Extraction could not be saved or processed. The indexed source was retained; retry explicitly after checking the local setup.');
+    await mutate(async () => {
+      const previous = uploadMetadata.find(x => x.id === id);
+      await updateUpload(id, { status: 'extraction_failed', extraction: { ...previous.extraction,
+        completedAt: new Date().toISOString(), elapsedMs: Date.now() - started,
+        error: { code: safe.code, message: safe.message, retryable: safe.retryable } } }, 'extraction_failed');
+    });
+  } finally { extractionJobs.delete(id); }
+}
+async function startExtraction(id) {
+  const outcome = await mutate(async () => {
+    const document = await documentById(id);
+    if (!document || !uploadMetadata.some(x => x.id === id)) fail(404, 'Only newly uploaded documents can be extracted with Fable.');
+    if (document.status === 'extracting' || extractionJobs.has(id)) return { document: metadata(document), start: false };
+    if (COMPLETED_EXTRACTIONS.has(document.status) || uploadedRows(id).length) fail(409, 'This document already has extraction results. Existing results will not be overwritten.');
+    const previous = document.extraction || { provider: 'fable', model: FABLE_MODEL, attempts: 0 };
+    const saved = await readJson(path.join(UPLOADS, id, 'extraction-result.json'), null);
+    if (saved) return { document: await completeExtraction(id, saved), start: false };
+    if (!providerInfo().upload.configured) {
+      return { document: await updateUpload(id, { status: 'awaiting_configuration', extraction: { ...previous,
+        error: { code: 'not_configured', message: 'Configure ANTHROPIC_API_KEY in the server-side .env file and restart the app, then retry extraction.', retryable: true } } }), start: false };
+    }
+    if (!document.pages?.some(p => normalize(p.text || ''))) {
+      return { document: await updateUpload(id, { status: 'needs_ocr', extraction: { ...previous,
+        error: { code: 'needs_ocr', message: 'No embedded text was found. OCR is required before source evidence can be verified.', retryable: false } } }), start: false };
+    }
+    return { document: await updateUpload(id, { status: 'extracting', extraction: { ...previous,
+      attempts: (previous.attempts || 0) + 1, startedAt: new Date().toISOString(), completedAt: null, elapsedMs: null, error: null } }, 'extraction_started'), start: true };
+  });
+  if (outcome.start) {
+    // Errors are reflected in document metadata; there are no background retries.
+    const job = runExtraction(id).catch(() => { console.error('Could not persist an extraction failure. The source file is retained.'); });
+    extractionJobs.set(id, job);
+  }
+  return outcome.document;
+}
+async function recoverInterruptedExtractions() {
+  for (const document of [...uploadMetadata]) {
+    if (document.status !== 'extracting') continue;
+    const saved = await readJson(path.join(UPLOADS, document.id, 'extraction-result.json'), null);
+    if (saved) await completeExtraction(document.id, saved);
+    else await updateUpload(document.id, { status: 'extraction_failed', extraction: { ...document.extraction,
+      error: { code: 'interrupted', message: 'The app stopped during extraction. No automatic retry was made; retry explicitly if needed.', retryable: true } } });
+  }
+}
+async function existingUploadForHash(sha256) {
+  return uploadMetadata.find(d => d.sourceSha256 === sha256 || d.pdfSha256 === sha256) ||
+    index.documents.find(d => d.sourceSha256 === sha256 || d.pdfSha256 === sha256);
+}
+async function storeUpload(input, bytes, extension, sha256) {
+  const duplicate = await existingUploadForHash(sha256);
+  if (duplicate) return { ...extractionResponse(metadata(duplicate), true), rows: (await workspace()).rows.filter(row => row.documentId === duplicate.id) };
+  const id = `upload-${randomUUID()}`; const folder = path.join(UPLOADS, id);
+  await fs.mkdir(folder, { recursive: false });
+  try {
+    await fs.writeFile(path.join(folder, 'original' + extension), bytes, { mode: 0o600 });
+    await runUploadHelper([folder, id, path.basename(input.name), extension]);
+    const document = await readJson(path.join(folder, 'document.json'), null);
+    if (!document) fail(422, 'Document index was not produced.');
+    const meta = { ...metadata(document), sourceSha256: sha256, uploadedAt: new Date().toISOString() };
+    await mutate(async () => {
+      const nextUploads = [...uploadMetadata, meta];
+      await atomicJson(path.join(STORAGE, 'uploads.json'), nextUploads); uploadMetadata = nextUploads;
+      uploadCache.set(id, document);
+      const next = structuredClone(state); next.audit.push({ id: randomUUID(), type: 'document_uploaded', documentId: id, at: meta.uploadedAt, name: meta.sourceFilename });
+      await atomicJson(path.join(STORAGE, 'state.json'), next); state = next;
+    });
+    return extractionResponse(await startExtraction(id));
+  } catch (error) { if (!uploadMetadata.some(x => x.id === id)) await fs.rm(folder, { recursive: true, force: true }); throw error; }
+}
+
 function runUploadHelper(args) {
   return new Promise((resolve, reject) => {
-    const child = spawn(PYTHON, [path.join(ROOT, 'upload_document.py'), ...args], { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(PYTHON, [path.join(ROOT, 'upload_document.py'), ...args], { cwd: ROOT, env: { ...process.env, ANTHROPIC_API_KEY: '' }, stdio: ['ignore', 'pipe', 'pipe'] });
     let stdout = '', stderr = '';
     const timer = setTimeout(() => { child.kill('SIGTERM'); reject(Object.assign(new Error('Document processing exceeded three minutes.'), { status: 422 })); }, 180000);
     child.stdout.on('data', d => { stdout += d.toString(); });
@@ -171,6 +311,8 @@ async function serveFile(req, res, filepath, root) {
   if (req.method === 'HEAD') return res.end();
   createReadStream(real, { start, end }).on('error', () => res.destroy()).pipe(res);
 }
+
+await recoverInterruptedExtractions();
 
 const server = http.createServer(async (req, res) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -229,28 +371,29 @@ const server = http.createServer(async (req, res) => {
       if (!bytes.length || bytes.length > 20 * 1024 * 1024) fail(413, 'File must be between 1 byte and 20 MB.');
       if (extension === '.pdf' && !bytes.subarray(0, 5).equals(Buffer.from('%PDF-'))) fail(400, 'File is not a PDF.');
       if (extension === '.docx' && !bytes.subarray(0, 2).equals(Buffer.from('PK'))) fail(400, 'File is not a DOCX archive.');
-      const id = `upload-${randomUUID()}`; const folder = path.join(UPLOADS, id);
-      await fs.mkdir(folder, { recursive: false });
+      const sha256 = createHash('sha256').update(bytes).digest('hex');
+      if (uploadInFlight.has(sha256)) {
+        const same = await uploadInFlight.get(sha256);
+        return json(res, 200, { ...same, duplicate: true });
+      }
+      const operation = storeUpload(input, bytes, extension, sha256);
+      uploadInFlight.set(sha256, operation);
       try {
-        await fs.writeFile(path.join(folder, 'original' + extension), bytes, { mode: 0o600 });
-        await runUploadHelper([folder, id, path.basename(input.name), extension]);
-        const document = await readJson(path.join(folder, 'document.json'), null);
-        if (!document) fail(422, 'Document index was not produced.');
-        const meta = { ...metadata(document), uploadedAt: new Date().toISOString() };
-        await mutate(async () => {
-          const nextUploads = [...uploadMetadata, meta];
-          await atomicJson(path.join(STORAGE, 'uploads.json'), nextUploads); uploadMetadata = nextUploads;
-          uploadCache.set(id, document);
-          const next = structuredClone(state); next.audit.push({ id: randomUUID(), type: 'document_uploaded', documentId: id, at: meta.uploadedAt, name: meta.sourceFilename });
-          await atomicJson(path.join(STORAGE, 'state.json'), next); state = next;
-        });
-        return json(res, 201, { document: meta, status: 'awaiting_extraction', message: 'Document stored and indexed. No AI extraction has run. Import structured results to add a row.' });
-      } catch (error) { if (!uploadMetadata.some(x => x.id === id)) await fs.rm(folder, { recursive: true, force: true }); throw error; }
+        const result = await operation;
+        return json(res, result.duplicate ? 200 : result.status === 'extracting' ? 202 : 201, result);
+      } finally { uploadInFlight.delete(sha256); }
+    }
+    const retryMatch = /^\/api\/documents\/(upload-[a-f0-9-]+)\/extract$/.exec(pathname);
+    if (req.method === 'POST' && retryMatch) {
+      await body(req);
+      const document = await startExtraction(retryMatch[1]);
+      return json(res, document.status === 'extracting' ? 202 : 200, extractionResponse(document));
     }
     if (req.method === 'POST' && pathname === '/api/import') {
       const input = await body(req);
       const result = await mutate(async () => {
         const accepted = await validateImport(input, await workspace());
+        if (accepted.some(row => uploadMetadata.some(d => d.id === row.documentId && d.status === 'extracting'))) fail(409, 'Wait for active extraction to finish before importing rows for this document.');
         const nextImports = [...imports, ...accepted];
         await atomicJson(path.join(STORAGE, 'imported-rows.json'), nextImports); imports = nextImports;
         const importedIds = new Set(accepted.map(x => x.documentId));

@@ -1,135 +1,86 @@
 # Folio — lease review
 
-A local spreadsheet-style lease register with source-linked PDF evidence. This is the first working dashboard version: 56 workbook columns, 15 source documents, seven lease rows, 529 PDF pages and 386 evidence references.
+A local spreadsheet-style lease register with a source document behind each extracted field. The initial collection is **10 synthetic leases and 10 related documents, covering 765 PDF pages**. Astra prepared the initial 56-column register. New uploaded documents are extracted with the Claude Fable API.
 
 ## Run
 
-Requires Node.js 22+.
+Requires Node.js 22 or newer:
 
 ```bash
 npm ci
 npm start
 ```
 
-Open **http://127.0.0.1:4173**. No frontend build step or API key is needed.
-The server binds to `127.0.0.1` only. Stop it with Control-C.
+Open **http://127.0.0.1:4173**. The server listens only on this computer. The initial register, PDF viewer, corrections and Excel export work without an API key. PDF.js is bundled locally and Excel export uses ExcelJS.
 
-The prepared register, document viewer, corrections, review history, structured imports
-and Excel export work with Node alone. PDF.js is bundled locally; Excel export uses ExcelJS.
+### Enable extraction for new uploads
 
-### Enable new PDF uploads
-
-Install Python 3.10+ and create a virtual environment inside this directory:
+Create a Python 3.10+ environment for PDF indexing:
 
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
+cp .env.example .env
 ```
 
-On Windows, use `python -m venv .venv` and `.venv\Scripts\python -m pip install -r requirements.txt`.
-The server finds this environment automatically. Alternatively set `LEASE_PYTHON` to your Python executable.
+On Windows use `.venv\Scripts\python` instead. Add your Anthropic API key to `.env`. The server reads `ANTHROPIC_API_KEY` and uses **claude-fable-5-2** with low reasoning effort and structured output. Restart after changing the key. Keys remain server-side; `.env` is ignored by Git. Uploading a document sends that document to Anthropic and uses API credits. The initial synthetic collection does not trigger API calls.
 
-### Enable new DOCX uploads
-
-Also install [LibreOffice](https://www.libreoffice.org/download/download-libreoffice/).
-The helper looks for `soffice` or `libreoffice` on PATH and common macOS/Windows install locations.
-Set `LEASE_SOFFICE` to the executable path if needed. Each conversion uses an isolated profile.
-
-Existing included DOCX files have already been converted to PDFs, so LibreOffice is only
-needed for **new DOCX uploads**. Scanned image-only PDFs need OCR before text evidence can be extracted.
+The server discovers the local Python environment automatically; alternatively set `LEASE_PYTHON`. DOCX uploads additionally require [LibreOffice](https://www.libreoffice.org/download/download-libreoffice/); set `LEASE_SOFFICE` if it is not on PATH. Scanned image-only PDFs must be OCRed first.
 
 ## Use
 
-- Click a cell to see its source document, page and highlighted quotation. Use **Open window** for a separate PDF viewer.
-- Switch between key terms, all 56 columns and grouped views. Search, filter and sort the register.
-- **Edit value** preserves the original extraction and evidence. **Restore extraction** removes a correction.
-- **Mark reviewed** records a review decision. Activity records local changes.
-- **Export** includes all 56 fields plus source evidence and review details. Unknown amounts stay blank; zero remains numeric zero.
-- **Add documents** indexes PDF/DOCX files up to 20 MB. New files stay **Awaiting extraction** until structured results are imported.
+- Click a cell to see its PDF page and highlighted quote. **Open window** opens a separate viewer.
+- Switch between key terms, all 56 columns and grouped views; search, filter and sort.
+- Corrections retain the original extracted value and evidence. Reviews and changes are recorded locally.
+- Export includes the full register and a source-evidence sheet. Unknown amounts remain blank.
+- Add PDF or DOCX documents up to 20 MB. The document is saved and indexed before extraction starts. Progress and processing time appear under Documents.
+- Completed lease extractions add a register row. Supporting documents are classified and their findings retained for review; they do not silently amend an existing lease.
+- Failed extractions keep the source document. Retry explicitly from Documents. Identical file uploads reuse the existing document and do not trigger a duplicate API call.
 
-The initial extraction was prepared by Codex. This version does not call Grok or any model API.
+## Dataset and interpretation
 
-## Dataset limitations
+The source files are the 20 PDFs in the repository's `PDFs/` directory. They replace the earlier blank MCL collection. The original PDF bytes and SHA-256 hashes are retained. `SYN-01` through `SYN-10` link each lease to its related deposit deed, alterations licence or assignment licence.
 
-These are uncompleted Model Commercial Lease templates, not executed leases or an occupied
-portfolio. Names, addresses, rents and dates often contain placeholders; optional clauses
-have not been selected. Do not interpret blanks as zero or an optional clause as agreed.
-The eight supporting templates are retained in the library and are **not** assumed to amend any of the seven leases.
+These are **synthetic examples**, not a verified live portfolio or independently labelled ground truth. Filled terms coexist with unresolved drafting alternatives. Signing, occupation, assignment completion, rent-review outcomes and cash deposits currently held are not assumed merely from a dated document. Original rent figures remain in the notes where the current reserved rent cannot be confirmed. Review dates are assessed as of **12 November 2026**. These assessments are a saved baseline, not a continuously updated asset-management feed.
 
-The register retains the labels and order from `Draft_Rent_Roll_Columns_v3.xlsx`.
-Source checks verify references against document text; they are not a measured extraction
-accuracy score against independent human labels. PDF page numbers refer to the included
-DOCX-to-PDF conversions.
+All 56 columns retain the labels and order from `Draft_Rent_Roll_Columns_v3.xlsx`. The register distinguishes extracted facts, derived interpretations, unknowns and fields needing review. A blank does not mean zero. No floor area or rent-per-square-foot figure is invented when measurement evidence is absent.
 
-The source documents' [original README](public/documents/originals/00-START-HERE.md),
-source URLs and checksums are retained. MCL templates remain subject to the
-[MCL conditions of use](https://www.modelcommerciallease.co.uk/conditions-of-use/).
-PDF.js's license is in `public/vendor/pdfjs/LICENSE`.
+Every saved evidence quote is checked against its document and one-based PDF page. This validates the citation, not the legal interpretation or completeness of the extraction. Initial extraction was performed by Astra; Fable is used only for new uploads. The underlying synthetic documents retain their source MCL markings. PDF.js's license is in `public/vendor/pdfjs/LICENSE`.
 
-## API and extraction contract
+## Local API
 
-All requests are local. POST requests use `Content-Type: application/json`.
+POST bodies use JSON. All endpoints are served by the loopback-only dashboard.
 
 | Endpoint | Behavior |
 | --- | --- |
-| `GET /api/workspace` | 56-column schema, rows, document metadata, local state and provider description |
-| `GET /api/documents/:id` | Full document with page text and word coordinates |
-| `POST /api/upload` | `{ "name": "lease.pdf", "base64": "..." }`; returns indexed document metadata and its ID |
-| `POST /api/import` | `{ "rows": [...] }`; validates and appends extracted rows |
-| `POST /api/cells` | `{ "rowId": "...", "columnId": "c35", "value": 100000, "note": "...", "reviewed": true }` |
-| `GET /api/export.xlsx` | Current register plus evidence as an Excel workbook |
+| `GET /api/workspace` | Columns, rows, document metadata, local state and provider status |
+| `GET /api/documents/:id` | Full document with page text, word coordinates and extraction status |
+| `POST /api/upload` | `{ "name": "lease.pdf", "base64": "..." }`; saves/indexes then starts background extraction |
+| `POST /api/documents/:id/extract` | Explicit extraction retry for a retained document |
+| `POST /api/import` | `{ "rows": [...] }`; validates and appends provider-neutral extracted rows |
+| `POST /api/cells` | Review or correct a cell, retaining its original source evidence |
+| `GET /api/export.xlsx` | Register plus source evidence in Excel format |
 
-Imported rows use the structure in [`public/data/extraction.json`](public/data/extraction.json):
+Poll workspace/document status until an upload is `extracted`, `supporting_extracted`, `extraction_failed`, `awaiting_configuration` or `needs_ocr`. No paid retries run automatically.
 
-```json
-{
-  "id": "unique-lease-id",
-  "documentId": "upload-id-returned-by-upload",
-  "title": "Lease title",
-  "category": "office",
-  "cells": {
-    "c35": {
-      "value": 100000,
-      "status": "extracted",
-      "explanation": "Annual main rent stated in the lease.",
-      "evidence": [
-        { "documentId": "upload-id-returned-by-upload", "page": 10, "quote": "Exact source text" }
-      ]
-    }
-  }
-}
-```
+Imported rows follow `public/data/extraction.json`. Every row must include all 56 keys (`c01`–`c56`); unknown values use `null`. Evidence uses `{documentId,page,quote}` with exact source text. Allowed statuses: `extracted`, `placeholder`, `optional`, `not_found`, `derived`, `needs_review`, `not_applicable`. Fable results are validated into this same contract. A wrong page can be corrected only where its exact quote occurs on exactly one other page; unsupported claims are flagged rather than accepted as cited facts.
 
-This snippet shows one field; **every imported row must include all of `c01` through `c56`**.
-Use `null` for unknown values, with an explanation and an empty evidence array when no source supports the field.
-Allowed statuses: `extracted`, `placeholder`, `optional`, `not_found`, `derived`, `needs_review`, `not_applicable`.
-Row IDs must be unique. Sources must already exist; page numbers are one-based. Quotes must
-match the specified page (whitespace is normalized). Word coordinates use PDF points from the top left.
-
-Suggested property categories are `office`, `retail`, `logistics` and `food-and-drink`, matching
-the UI filters. The dashboard accepts other category strings but the fixed category filter
-would need extending for them.
-
-A future provider should return this schema. Keep API keys on the server and outside Git.
-The inbox module can upload its stored PDF, retain the returned document ID, then pass
-provider results through this import contract. This bridge is not implemented in this version.
-
-## Code map
+## Development
 
 | File | Responsibility |
 | --- | --- |
-| `public/app.js`, `public/styles.css` | Grid, document library, review workflow and local UI |
-| `public/pdf-viewer.js`, `public/viewer.js` | PDF rendering, page navigation and quote highlighting |
-| `server.mjs` | Local HTTP API, validation, storage and static assets |
-| `upload_document.py` | PDF text/coordinate indexing and DOCX conversion |
-| `export.mjs` | Excel workbook and source-evidence export |
-| `public/data/columns.json` | Stable 56-field schema |
-| `public/data/document-index.json` | Prepared page text and word coordinates |
-| `public/data/extraction.json` | Prepared source extraction |
+| `public/app.js`, `public/styles.css` | Register, document library, review workflow |
+| `public/pdf-viewer.js`, `public/viewer.js` | PDF rendering and quote highlighting |
+| `server.mjs` | Local API, storage and extraction jobs |
+| `fable-extractor.mjs` | Fable request, structured results and source validation |
+| `upload_document.py` | PDF indexing and optional DOCX conversion |
+| `export.mjs` | Excel export |
+| `public/data/columns.json` | Stable workbook specification |
+| `public/data/document-index.json` | Initial PDF text and coordinates |
+| `public/data/extraction.json` | Astra's initial register |
 
-`npm run check` checks JavaScript syntax. No frontend bundler is required.
+Run `npm run check` for syntax validation, `npm run validate:data` for all source hashes and evidence anchors, and `npm test` for the mocked provider/server checks (Python with pdfplumber required). No frontend bundler is required.
 
-Runtime settings: `PORT` (default `4173`), `LEASE_STORAGE_DIR` (default `storage/`),
-`LEASE_PYTHON`, `LEASE_SOFFICE`.
-Review state, imports, uploads and temporary exports live under `storage/`, which is ignored.
-Back up that directory to preserve local work. The checked-in baseline is never overwritten by edits.
+Runtime settings: `PORT` (default `4173`), `LEASE_STORAGE_DIR` (default `storage/`), `LEASE_PYTHON`, `LEASE_SOFFICE`, `ANTHROPIC_API_KEY`. Local reviews, uploads, imports and exports are stored under the ignored `storage/` directory. Back it up to preserve local work. The checked-in baseline is never overwritten by reviews or imports.
+
+The separate email module is **not connected or started by Folio**. This version uses manual document uploads only.

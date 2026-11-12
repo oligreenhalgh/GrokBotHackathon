@@ -30,15 +30,16 @@ h3 { font-size: 13px; font-weight: 600; }
 .eyebrow { font-size: 11px; color: var(--muted); line-height: 1.4; }
 .boot { height: 100vh; display: grid; place-items: center; color: var(--muted); }
 .shell { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
-.app-header { display: flex; align-items: center; height: 54px; padding: 0 28px; border-bottom: 1px solid var(--line); flex-shrink: 0; gap: 42px; }
-.brand { font-family: inherit; font-size: 23px; font-weight: 700; letter-spacing: -1px; color: var(--accent); }
+.app-header { display: flex; align-items: center; height: 80px; padding: 0 32px; background: var(--accent); color: #fff; border-bottom: 1px solid var(--accent-hover); flex-shrink: 0; gap: 48px; }
+.brand { font-family: inherit; font-size: 27px; font-weight: 700; letter-spacing: -1px; color: #fff; }
 .main-nav { display: flex; align-self: stretch; gap: 27px; }
-.nav-button { padding: 0; font-size: 12px; color: var(--muted); border-bottom: 2px solid transparent; margin-top: 2px; }
-.nav-button:hover { color: var(--ink); }
-.nav-button.active { color: var(--accent); border-color: var(--accent); font-weight: 700; }
-.collection-button { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; padding: 7px 0 7px 10px; white-space: nowrap; }
+.nav-button { padding: 0; font-size: 13px; color: #ffffffbd; border-bottom: 2px solid transparent; margin-top: 2px; }
+.nav-button:hover { color: #fff; }
+.nav-button.active { color: #fff; border-color: #fff; font-weight: 700; }
+.collection-button { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: #ffffffbd; font-size: 11px; padding: 7px 0 7px 10px; white-space: nowrap; }
 .collection-button svg { width: 13px; height: 13px; }
-.collection-button:hover { color: var(--ink); }
+.collection-button:hover { color: #fff; }
+.app-header :focus-visible { outline-color: #fff; }
 .main { flex: 1; min-height: 0; }
 .content { padding: 26px 28px 20px; height: 100%; overflow: auto; display: flex; flex-direction: column; }
 .page-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-shrink: 0; }
@@ -108,7 +109,7 @@ h3 { font-size: 13px; font-weight: 600; }
 .document-list-header { height: 33px; color: #6b4f5a; font-size: 10px; font-weight: 600; border-bottom: 1px solid var(--line); }
 .document-row { min-height: 61px; border-bottom: 1px solid var(--line); padding-top: 12px; padding-bottom: 12px; }
 .document-row:hover { background: var(--soft); }
-.document-name { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.document-name { text-align: left; padding: 0; display: flex; align-items: center; gap: 14px; min-width: 0; }
 .document-name>svg { width: 19px; height: 23px; color: #a97383; }
 .document-name strong { font-size: 12px; font-weight: 600; display: block; line-height: 1.5; }
 .document-name small { display: block; font-size: 10px; color: #88777e; margin-top: 3px; overflow-wrap: anywhere; }
@@ -201,7 +202,7 @@ h3 { font-size: 13px; font-weight: 600; }
   .review-row>svg { display: none; }
 }
 @media (max-width: 600px) {
-  .app-header { padding-inline: 14px; height: 49px; gap: 23px; }
+  .app-header { padding-inline: 14px; height: 64px; gap: 23px; }
   .brand { font-size: 20px; }
   .main-nav { gap: 18px; }
   .nav-button { font-size: 10px; }
@@ -238,3 +239,16 @@ h3 { font-size: 13px; font-weight: 600; }
   .standalone-viewer>.pdf-stage { padding: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none!important; } }
+
+.lease-grid td.attention .cell-value { color: #965c27; }
+.document-type small { display: block; color: var(--muted); margin-top: 5px; font-size: 10px; }
+.retry-button { display: flex; margin-top: 7px; }
+.document-error { padding: 0 14px 14px 47px; color: #9c263e; font-size: 11px; line-height: 1.6; }
+.document-analysis { padding: 0 14px 14px 47px; font-size: 11px; line-height: 1.6; color: var(--muted); }
+.document-analysis summary { cursor: pointer; color: var(--accent); }
+.document-analysis p { margin-top: 7px; }
+@media (max-width: 600px) { .document-list-header, .document-row { grid-template-columns: minmax(130px,1fr) 110px 30px 20px; gap: 8px; padding-inline: 4px; } .document-name>svg { display: none; } }
+
+.finding { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.finding a { display: block; margin-top: 7px; color: var(--accent); font-size: 10px; }
+.finding a:hover { text-decoration: underline; }
