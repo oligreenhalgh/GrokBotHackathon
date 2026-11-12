@@ -9,3 +9,16 @@ __pycache__/
 data/
 *.sqlite
 storage/
+
+# Install dependencies locally; do not commit generated workspace state.
+node_modules/
+*.log
+.pytest_cache/
+.ruff_cache/
+
+# Public MCL fixtures used by the checked-in lease dashboard (not partner data).
+!lease-review/public/data/
+lease-review/public/data/*
+!lease-review/public/data/columns.json
+!lease-review/public/data/document-index.json
+!lease-review/public/data/extraction.json

@@ -1,0 +1,2 @@
+# Preserve bundled upstream files and keep them out of GitHub language statistics.
+lease-review/public/vendor/** linguist-vendored -whitespace

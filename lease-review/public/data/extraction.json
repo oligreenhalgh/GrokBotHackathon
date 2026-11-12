@@ -1,0 +1,4618 @@
+{
+  "schemaVersion": 1,
+  "provider": {
+    "id": "prepared",
+    "label": "Prepared extraction",
+    "live": false
+  },
+  "extractedAt": "2026-11-12",
+  "method": "Assistant-reviewed source extraction from the seven MCL lease templates. No model API called.",
+  "rows": [
+    {
+      "id": "mcl-office-01",
+      "documentId": "mcl-office-01",
+      "title": "Whole office lease",
+      "category": "office",
+      "cells": {
+        "c01": {
+          "value": 1,
+          "status": "derived",
+          "explanation": "Assigned display row number; not a term extracted from the document.",
+          "evidence": []
+        },
+        "c02": {
+          "value": "Office",
+          "status": "extracted",
+          "explanation": "The cover identifies the intended asset category. This identifies a template type, not an occupied asset.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "WHOLE (OFFICE)"
+            }
+          ]
+        },
+        "c03": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The premises address is a drafting placeholder. Obtain the completed demise and lease plan to identify a real unit.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 11,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            }
+          ]
+        },
+        "c04": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The whole-building demise has an address placeholder; no actual building name is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 11,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 11,
+              "quote": "all buildings from time to time on the Premises and the load-bearing walls, structure,\nfoundations and roofs of those buildings;"
+            }
+          ]
+        },
+        "c05": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No specific unit or suite identifier is provided. The completed premises description and lease plan are required.",
+          "evidence": []
+        },
+        "c06": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No actual floor number or floor list is completed. Generic references to floors in demise/underletting clauses do not identify the occupied floors.",
+          "evidence": []
+        },
+        "c07": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measured floor area is stated. Obtain the completed lease plan or measured survey; do not treat a building or unit template as an area measurement.",
+          "evidence": []
+        },
+        "c08": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No confirmed NIA, GIA or IPMS measurement basis is stated for an actual unit. A measured survey or agreed area schedule is required.",
+          "evidence": []
+        },
+        "c09": {
+          "value": "Offices and ancillary uses; E(g)(i) / B1(a) alternative",
+          "status": "optional",
+          "explanation": "The Permitted Use definition describes offices and ancillary uses. The bracketed England E(g)(i) / Wales B1(a) references remain alternatives; the executed lease and location are needed to select the applicable class.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 11,
+              "quote": "the use of the Premises as offices"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 11,
+              "quote": "to the Town and Country Planning (Use Classes) Order 1987 and ancillary uses;"
+            }
+          ]
+        },
+        "c10": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The template refers to parking but supplies no confirmed demised/licensed space count. A completed plan or parking licence is required; absence of a count does not mean zero.",
+          "evidence": []
+        },
+        "c11": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No EPC certificate or A–G rating is supplied. EPC definitions and obligations are not an actual property rating.",
+          "evidence": []
+        },
+        "c12": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No dated EPC certificate is supplied, so its expiry cannot be established.",
+          "evidence": []
+        },
+        "c13": {
+          "value": null,
+          "status": "not_applicable",
+          "explanation": "This is an unused template, not evidence that a real unit is let or vacant. A current tenancy schedule or executed lease and occupancy evidence is required.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c14": {
+          "value": "[TENANT]",
+          "status": "placeholder",
+          "explanation": "LR3 leaves the tenant legal name uncompleted. No current tenant is identified.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 4,
+              "quote": "Tenant [TENANT]"
+            }
+          ]
+        },
+        "c15": {
+          "value": "[COMPANY NUMBER]",
+          "status": "placeholder",
+          "explanation": "The tenant registration number in LR3 is a placeholder; verify the completed tenant identity and registration.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in\n[England and Wales] [the United Kingdom]\n[COUNTRY] under company registration number\n[COMPANY NUMBER])"
+            }
+          ]
+        },
+        "c16": {
+          "value": "[GUARANTOR] (optional)",
+          "status": "optional",
+          "explanation": "The optional guarantor block in LR3 is uncompleted. Its presence in the template does not establish that a guarantor exists for a transaction.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 4,
+              "quote": "[Guarantor [GUARANTOR]"
+            }
+          ]
+        },
+        "c17": {
+          "value": "Lease of a whole building — template",
+          "status": "extracted",
+          "explanation": "The supplied occupational form is a lease template; it is not a licence or agreement for lease. Any optional headlease wording does not identify a completed superior-title arrangement.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "WHOLE (OFFICE)"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 15,
+              "quote": "The Landlord leases the Premises to the Tenant"
+            }
+          ]
+        },
+        "c18": {
+          "value": "Unselected contracting-out option",
+          "status": "optional",
+          "explanation": "The contracting-out clause and statutory-notice/declaration dates remain uncompleted. Do not classify the actual tenancy as In or Out without the executed lease, warning notice and declaration.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 30,
+              "quote": "a statutory declaration dated [DATE]"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 31,
+              "quote": "the provisions of sections 24–\n28 (inclusive) of the 1954 Act do not apply to the tenancy created by this Lease."
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c19": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term commencement date is [●]; it cannot be derived from the template version date or rent-commencement placeholder.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c20": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional Break Date definition contains [DATE OR DATES] and alternative rolling-date wording. No actual break date is selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 7,
+              "quote": "[DATE OR DATES]"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 33,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c21": {
+          "value": "Tenant (optional break clause)",
+          "status": "optional",
+          "explanation": "Clause 8 offers a tenant break only if retained in the completed lease. The landlord’s ability to waive conditions is not a landlord break right. Separate damage-termination rights are not scheduled contractual breaks.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 33,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c22": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional tenant break requires a notice period expressed as [LENGTH] months; no number is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 33,
+              "quote": "formal notice\nof not less than [LENGTH] months’"
+            }
+          ]
+        },
+        "c23": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional break-payment condition leaves the figure or proportion of Main Rent blank. Do not record a zero penalty or calculate a payment without a completed clause and rent.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 34,
+              "quote": "[insert figure/proportion of the Main Rent] (plus any VAT payable on that amount).]]"
+            }
+          ]
+        },
+        "c24": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The contractual expiry date is [●]. The blank term length and start date do not permit a calculation.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c25": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Review Date is optional and expressed as [DATE] in [YEARS]. No next review date is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 12,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c26": {
+          "value": "5 yearly / none (unselected)",
+          "status": "optional",
+          "explanation": "The cover offers five-yearly reviews or none, while the definition leaves review years blank. This is not an agreed review cycle.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "Rent review pattern [5 yearly][None]"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 12,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c27": {
+          "value": "Open market (optional template mechanism)",
+          "status": "optional",
+          "explanation": "Schedule 2 contains an open-market review mechanism. The cover retains open-market, index-linked RPI/CPI and stepped alternatives, so the transaction’s review basis has not been selected. No standalone clause template is incorporated by this extraction.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 38,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket on the Rent Review Date"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c28": {
+          "value": "Conditional upward-only",
+          "status": "optional",
+          "explanation": "If Schedule 2 is retained, the reviewed Main Rent is the higher of the previous Main Rent and Market Rent. The cover alternatives and optional review wording prevent treating this as a confirmed term for a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 39,
+              "quote": "On the Rent Review Date, the Main Rent is to be reviewed to the higher of:"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 39,
+              "quote": "the Main Rent reserved immediately before the Rent Review Date; and"
+            }
+          ]
+        },
+        "c29": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review cap is specified in this lease. The cover’s index-linked option does not incorporate the separate index-linked clause template or supply a cap.",
+          "evidence": []
+        },
+        "c30": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review collar is specified. The open-market upward-only mechanism is not a stated percentage collar; a selected review clause is required.",
+          "evidence": []
+        },
+        "c31": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover offers no rent-free period or an unspecified number of months. Neither a period nor its start date is selected; do not assume that the lease start creates a rent-free incentive.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c32": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Commencement Date is [DATE OR DESCRIPTION] and may be deferred under the damage provisions. With the rent-free option unresolved, no rent-free end date can be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 12,
+              "quote": "“Rent Commencement Date”\n[DATE OR DESCRIPTION]"
+            }
+          ]
+        },
+        "c33": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The draft waives Main Rent before Rent Commencement Date, but the cover leaves the existence/duration of a rent-free incentive unselected. This is not a confirmed 100% incentive; Insurance Rent and any Service Charge have separate provisions.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 16,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c34": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No landlord capital contribution amount is stated. Obtain an executed agreement for lease or side letter; the unrelated agreement-for-lease template is not a linked transaction document.",
+          "evidence": []
+        },
+        "c35": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Annual Main Rent is explicitly an amount placeholder; no actual contracted rent is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 10,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c36": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate contracted rent per square foot: both annual Main Rent (c35) and measured unit area (c07) are unknown. Required formula: annual rent ÷ area; no default zero is used.",
+          "evidence": []
+        },
+        "c37": {
+          "value": "Monthly / quarterly (unselected)",
+          "status": "optional",
+          "explanation": "Clause 3.6 and the Rent Days definition leave monthly and quarterly alternatives in place. Neither payment frequency has been selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 16,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 12,
+              "quote": "[25 March, 24 June, 29 September and 25 December;][the first day of every month;]"
+            }
+          ]
+        },
+        "c38": {
+          "value": "Advance (template obligation)",
+          "status": "extracted",
+          "explanation": "Clause 3.6 requires Main Rent payments in advance in the draft. The payment frequency is still unselected and this is not evidence of actual payments.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 16,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c39": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Stepped rent is only an unselected cover option. No selected step schedule or effective step date is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c40": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No stepped annual rent amounts are supplied. A completed stepped-rent schedule is required; the Main Rent placeholder cannot provide them.",
+          "evidence": []
+        },
+        "c41": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate stepped rent per square foot: stepped annual rent (c40) and measured area (c07) are unknown.",
+          "evidence": []
+        },
+        "c42": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No turnover-rent percentage is specified. The separate turnover-rent template is not linked to this lease and supplies no agreed term here.",
+          "evidence": []
+        },
+        "c43": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No valuation or letting advice supplies an ERV. The defined hypothetical Market Rent used at future rent review is not a current estimated-rental-value figure.",
+          "evidence": []
+        },
+        "c44": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate ERV per square foot without a valuation/letting-advice ERV (c43) and measured area (c07).",
+          "evidence": []
+        },
+        "c45": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No annual service-charge figure is stated for this whole-building draft. The Outgoings definition includes shared Common Facilities costs, which does not establish a fixed annual service charge; obtain the relevant demands/budget.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 10,
+              "quote": "all costs and expenses for which the Landlord, any other owner or the occupier of\nthe Premises is responsible in respect of the Common Facilities;"
+            }
+          ]
+        },
+        "c46": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate service charge per square foot without an annual charge (c45) and measured area (c07).",
+          "evidence": []
+        },
+        "c47": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No agreed service-charge monetary cap is specified. The separate service-charge-cap clause template is not a linked variation or incorporated term.",
+          "evidence": []
+        },
+        "c48": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge minimum/collar amount is specified. A completed lease or applicable side letter is needed before recording one.",
+          "evidence": []
+        },
+        "c49": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The draft requires the specified insurance costs to be paid on demand, but supplies no annual insurance premium or rent amount. Obtain the policy schedule and demand.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 41,
+              "quote": "The Tenant must pay on demand:\n2.1.1 the whole of:"
+            }
+          ]
+        },
+        "c50": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No current cash deposit balance is stated. The assignment provisions contemplate a future assignee deposit of not less than [six] months’ Main Rent if required; this is neither an agreed current deposit nor a completed amount. No separate deposit template is treated as linked.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 22,
+              "quote": "a rent deposit deed with the Landlord\nproviding for a deposit of not less than [six] months’ Main Rent"
+            }
+          ]
+        },
+        "c51": {
+          "value": "Whole-demise repair + insurance contribution; classification requires review",
+          "status": "needs_review",
+          "explanation": "The premises include structure, foundations and roofs and the draft imposes good/substantial repair plus insurance contribution. Insured/uninsured damage exclusions and an optional schedule-of-condition limit mean the agreed liability must be reviewed before calling an actual lease FRI.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 11,
+              "quote": "all buildings from time to time on the Premises and the load-bearing walls, structure,\nfoundations and roofs of those buildings;"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 18,
+              "quote": "keep the Premises clean and tidy and in good and substantial repair and\ncondition;"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 41,
+              "quote": "The Tenant must pay on demand:\n2.1.1 the whole of:"
+            }
+          ]
+        },
+        "c52": {
+          "value": "Optional — not confirmed",
+          "status": "optional",
+          "explanation": "A bracketed repairing-liability limitation refers to a schedule of condition, but the option is not selected and no completed condition schedule is supplied. Its wording is not proof that one is attached to a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 18,
+              "quote": "schedule of\ncondition attached to this Lease in any better state of repair and condition than\nevidenced in that schedule"
+            }
+          ]
+        },
+        "c53": {
+          "value": "Conditional reinstatement (draft obligation)",
+          "status": "extracted",
+          "explanation": "The end-of-term clause requires removal of Permitted Works unless landlord and tenant otherwise agree, and making good/restoring the pre-installation configuration. Confirm retained options and any actual licence or variation before applying it to specific works.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 20,
+              "quote": "unless and to the extent that the Landlord and the Tenant otherwise agree,\nall Permitted Works;"
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 20,
+              "quote": "restore them to the same configuration, state and condition\nas they were in before the items removed were originally installed."
+            }
+          ]
+        },
+        "c54": {
+          "value": "Whole assignment with consent; underletting subject to selected options",
+          "status": "optional",
+          "explanation": "Assignment of the whole is permitted with landlord consent and conditions (including AGA/security where required). Part assignment is not authorised. The optional underletting schedule permits whole/Permitted Part alternatives with consent and an Approved Underlease/Undertenant; the bracketed underletting choices remain unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 22,
+              "quote": "The Tenant may, with the Landlord’s consent, assign the whole of the Premises."
+            },
+            {
+              "documentId": "mcl-office-01",
+              "page": 51,
+              "quote": "Tenant may, with the Landlord’s consent, underlet the\nwhole of the Premises [or the whole of a Permitted Part]"
+            }
+          ]
+        },
+        "c55": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No transaction-specific side letter or variation is identified or linked. References to supplemental documents and prior leases are generic/blank; they do not establish either their existence or their absence in an actual transaction.",
+          "evidence": []
+        },
+        "c56": {
+          "value": "Unused MCL template — no executed tenancy or cashflow established",
+          "status": "extracted",
+          "explanation": "MCL version 1.9 is expressly intended as a template. Names, addresses, rents and dates remain placeholders; optional clauses must be selected before use. The whole-building form includes structure, foundations and roofs in the demise. This row describes only this supplied lease, not other standalone templates.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mcl-office-02",
+      "documentId": "mcl-office-02",
+      "title": "Part of building office lease",
+      "category": "office",
+      "cells": {
+        "c01": {
+          "value": 2,
+          "status": "derived",
+          "explanation": "Assigned display row number; not a term extracted from the document.",
+          "evidence": []
+        },
+        "c02": {
+          "value": "Office",
+          "status": "extracted",
+          "explanation": "The cover identifies the intended asset category. This identifies a template type, not an occupied asset.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "PART OF BUILDING (OFFICE)"
+            }
+          ]
+        },
+        "c03": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The premises address is a drafting placeholder. Obtain the completed demise and lease plan to identify a real unit.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 13,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            }
+          ]
+        },
+        "c04": {
+          "value": "[BUILDING DESCRIPTION]",
+          "status": "placeholder",
+          "explanation": "The Building definition is not completed; the document describes a letting of part, not the entire building.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 8,
+              "quote": "the building known as [BUILDING DESCRIPTION]"
+            }
+          ]
+        },
+        "c05": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No specific unit or suite identifier is provided. The completed premises description and lease plan are required.",
+          "evidence": []
+        },
+        "c06": {
+          "value": "[FLOOR]",
+          "status": "placeholder",
+          "explanation": "The office floor is explicitly left as a cover-page placeholder.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "[FLOOR]\n[BUILDING DETAILS]"
+            }
+          ]
+        },
+        "c07": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measured floor area is stated. Obtain the completed lease plan or measured survey; do not treat a building or unit template as an area measurement.",
+          "evidence": []
+        },
+        "c08": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No confirmed NIA, GIA or IPMS measurement basis is stated for an actual unit. A measured survey or agreed area schedule is required.",
+          "evidence": []
+        },
+        "c09": {
+          "value": "Offices and ancillary uses; E(g)(i) / B1(a) alternative",
+          "status": "optional",
+          "explanation": "The Permitted Use definition describes offices and ancillary uses. The bracketed England E(g)(i) / Wales B1(a) references remain alternatives; the executed lease and location are needed to select the applicable class.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 12,
+              "quote": "the use of the Premises as offices"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 12,
+              "quote": "to the Town and Country Planning (Use Classes) Order 1987 and ancillary uses;"
+            }
+          ]
+        },
+        "c10": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Staff-parking rights are optional, with non-designated and designated-space alternatives. Neither the chosen option nor an actual number of spaces is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 42,
+              "quote": "Option 1: Non-designated spaces for parking"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 43,
+              "quote": "Option 2: Designated spaces for parking subject to a right to move those spaces"
+            }
+          ]
+        },
+        "c11": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No EPC certificate or A–G rating is supplied. EPC definitions and obligations are not an actual property rating.",
+          "evidence": []
+        },
+        "c12": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No dated EPC certificate is supplied, so its expiry cannot be established.",
+          "evidence": []
+        },
+        "c13": {
+          "value": null,
+          "status": "not_applicable",
+          "explanation": "This is an unused template, not evidence that a real unit is let or vacant. A current tenancy schedule or executed lease and occupancy evidence is required.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c14": {
+          "value": "[TENANT]",
+          "status": "placeholder",
+          "explanation": "LR3 leaves the tenant legal name uncompleted. No current tenant is identified.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 4,
+              "quote": "Tenant [TENANT]"
+            }
+          ]
+        },
+        "c15": {
+          "value": "[COMPANY NUMBER]",
+          "status": "placeholder",
+          "explanation": "The tenant registration number in LR3 is a placeholder; verify the completed tenant identity and registration.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in\n[England and Wales] [the United Kingdom]\n[COUNTRY] under company registration number\n[COMPANY NUMBER])"
+            }
+          ]
+        },
+        "c16": {
+          "value": "[GUARANTOR] (optional)",
+          "status": "optional",
+          "explanation": "The optional guarantor block in LR3 is uncompleted. Its presence in the template does not establish that a guarantor exists for a transaction.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 4,
+              "quote": "[Guarantor [GUARANTOR]"
+            }
+          ]
+        },
+        "c17": {
+          "value": "Lease of part of a building — template",
+          "status": "extracted",
+          "explanation": "The supplied occupational form is a lease template; it is not a licence or agreement for lease. Any optional headlease wording does not identify a completed superior-title arrangement.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "PART OF BUILDING (OFFICE)"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 19,
+              "quote": "The Landlord leases the Premises to the Tenant"
+            }
+          ]
+        },
+        "c18": {
+          "value": "Unselected contracting-out option",
+          "status": "optional",
+          "explanation": "The contracting-out clause and statutory-notice/declaration dates remain uncompleted. Do not classify the actual tenancy as In or Out without the executed lease, warning notice and declaration.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 36,
+              "quote": "a statutory declaration dated [DATE]"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 36,
+              "quote": "the provisions of sections 24–\n28 (inclusive) of the 1954 Act do not apply to the tenancy created by this Lease."
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c19": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term commencement date is [●]; it cannot be derived from the template version date or rent-commencement placeholder.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 9,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c20": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional Break Date definition contains [DATE OR DATES] and alternative rolling-date wording. No actual break date is selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 8,
+              "quote": "[DATE OR DATES]"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 39,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c21": {
+          "value": "Tenant (optional break clause)",
+          "status": "optional",
+          "explanation": "Clause 8 offers a tenant break only if retained in the completed lease. The landlord’s ability to waive conditions is not a landlord break right. Separate damage-termination rights are not scheduled contractual breaks.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 39,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c22": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional tenant break requires a notice period expressed as [LENGTH] months; no number is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 39,
+              "quote": "formal notice\nof not less than [LENGTH] months’"
+            }
+          ]
+        },
+        "c23": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional break-payment condition leaves the figure or proportion of Main Rent blank. Do not record a zero penalty or calculate a payment without a completed clause and rent.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 40,
+              "quote": "[insert figure/proportion of the Main Rent] (plus any VAT payable on that amount).]]"
+            }
+          ]
+        },
+        "c24": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The contractual expiry date is [●]. The blank term length and start date do not permit a calculation.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 9,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c25": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Review Date is optional and expressed as [DATE] in [YEARS]. No next review date is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 15,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c26": {
+          "value": "5 yearly / none (unselected)",
+          "status": "optional",
+          "explanation": "The cover offers five-yearly reviews or none, while the definition leaves review years blank. This is not an agreed review cycle.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "Rent review pattern [5 yearly][None]"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 15,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c27": {
+          "value": "Open market (optional template mechanism)",
+          "status": "optional",
+          "explanation": "Schedule 2 contains an open-market review mechanism. The cover retains open-market, index-linked RPI/CPI and stepped alternatives, so the transaction’s review basis has not been selected. No standalone clause template is incorporated by this extraction.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 48,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket on the Rent Review Date"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c28": {
+          "value": "Conditional upward-only",
+          "status": "optional",
+          "explanation": "If Schedule 2 is retained, the reviewed Main Rent is the higher of the previous Main Rent and Market Rent. The cover alternatives and optional review wording prevent treating this as a confirmed term for a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 48,
+              "quote": "On the Rent Review Date, the Main Rent is to be reviewed to the higher of:"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 48,
+              "quote": "the Main Rent reserved immediately before the Rent Review Date; and"
+            }
+          ]
+        },
+        "c29": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review cap is specified in this lease. The cover’s index-linked option does not incorporate the separate index-linked clause template or supply a cap.",
+          "evidence": []
+        },
+        "c30": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review collar is specified. The open-market upward-only mechanism is not a stated percentage collar; a selected review clause is required.",
+          "evidence": []
+        },
+        "c31": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover offers no rent-free period or an unspecified number of months. Neither a period nor its start date is selected; do not assume that the lease start creates a rent-free incentive.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c32": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Commencement Date is [DATE OR DESCRIPTION] and may be deferred under the damage provisions. With the rent-free option unresolved, no rent-free end date can be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 15,
+              "quote": "“Rent Commencement Date”\n[DATE OR DESCRIPTION]"
+            }
+          ]
+        },
+        "c33": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The draft waives Main Rent before Rent Commencement Date, but the cover leaves the existence/duration of a rent-free incentive unselected. This is not a confirmed 100% incentive; Insurance Rent and any Service Charge have separate provisions.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 19,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c34": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No landlord capital contribution amount is stated. Obtain an executed agreement for lease or side letter; the unrelated agreement-for-lease template is not a linked transaction document.",
+          "evidence": []
+        },
+        "c35": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Annual Main Rent is explicitly an amount placeholder; no actual contracted rent is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 11,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c36": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate contracted rent per square foot: both annual Main Rent (c35) and measured unit area (c07) are unknown. Required formula: annual rent ÷ area; no default zero is used.",
+          "evidence": []
+        },
+        "c37": {
+          "value": "Monthly / quarterly (unselected)",
+          "status": "optional",
+          "explanation": "Clause 3.6 and the Rent Days definition leave monthly and quarterly alternatives in place. Neither payment frequency has been selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 19,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 15,
+              "quote": "[25 March, 24 June, 29 September and 25 December;][the first day of every month;]"
+            }
+          ]
+        },
+        "c38": {
+          "value": "Advance (template obligation)",
+          "status": "extracted",
+          "explanation": "Clause 3.6 requires Main Rent payments in advance in the draft. The payment frequency is still unselected and this is not evidence of actual payments.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 19,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c39": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Stepped rent is only an unselected cover option. No selected step schedule or effective step date is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c40": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No stepped annual rent amounts are supplied. A completed stepped-rent schedule is required; the Main Rent placeholder cannot provide them.",
+          "evidence": []
+        },
+        "c41": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate stepped rent per square foot: stepped annual rent (c40) and measured area (c07) are unknown.",
+          "evidence": []
+        },
+        "c42": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No turnover-rent percentage is specified. The separate turnover-rent template is not linked to this lease and supplies no agreed term here.",
+          "evidence": []
+        },
+        "c43": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No valuation or letting advice supplies an ERV. The defined hypothetical Market Rent used at future rent review is not a current estimated-rental-value figure.",
+          "evidence": []
+        },
+        "c44": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate ERV per square foot without a valuation/letting-advice ERV (c43) and measured area (c07).",
+          "evidence": []
+        },
+        "c45": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The lease provides a service-charge mechanism based on a fair proportion of Service Costs, but no annual budget, apportionment amount or demand. Obtain these documents to establish the annual charge.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 15,
+              "quote": "a fair proportion (calculated on a floor area basis or any other method as the Landlord decides\nfrom time to time) of the Service Costs"
+            }
+          ]
+        },
+        "c46": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate service charge per square foot without an annual charge (c45) and measured area (c07).",
+          "evidence": []
+        },
+        "c47": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No agreed service-charge monetary cap is specified. A drafting footnote directs the author to another MCL clause only if a cap has been agreed; this does not incorporate that separate template or establish an agreed cap.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 50,
+              "quote": "If the Landlord has agreed to cap the amount of service charge payable by the Tenant, please refer to the Model\nCommercial Lease: Index Linked Service Charge Cap clause (MCL-LEASECLAUSE-05)."
+            }
+          ]
+        },
+        "c48": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge minimum/collar amount is specified. A completed lease or applicable side letter is needed before recording one.",
+          "evidence": []
+        },
+        "c49": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The draft requires an apportioned contribution to insurance costs, but contains no annual premium, selected apportionment or demand amount. Obtain the insurance schedule/demand.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 57,
+              "quote": "The Tenant must pay on demand:\n2.1.1 a fair and reasonable proportion of:"
+            }
+          ]
+        },
+        "c50": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No current cash deposit balance is stated. The assignment provisions contemplate a future assignee deposit of not less than [six] months’ Main Rent if required; this is neither an agreed current deposit nor a completed amount. No separate deposit template is treated as linked.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 27,
+              "quote": "a rent deposit deed with the Landlord\nproviding for a deposit of not less than [six] months’ Main Rent"
+            }
+          ]
+        },
+        "c51": {
+          "value": "Demised-part repair + service charge; classification requires review",
+          "status": "needs_review",
+          "explanation": "The tenant repairs the defined premises and External Works; structural parts are excluded from the demise. Building costs are dealt with through Service Charge and apportioned insurance. Exact inclusions, damage exceptions and the optional condition limitation must be resolved before assigning a simple FRI/IRI classification.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 21,
+              "quote": "keep the Premises and any External Works clean and tidy and in good and\nsubstantial repair and condition;"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 14,
+              "quote": "all structural parts of the Building;"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 15,
+              "quote": "a fair proportion (calculated on a floor area basis or any other method as the Landlord decides\nfrom time to time) of the Service Costs"
+            }
+          ]
+        },
+        "c52": {
+          "value": "Optional — not confirmed",
+          "status": "optional",
+          "explanation": "A bracketed repairing-liability limitation refers to a schedule of condition, but the option is not selected and no completed condition schedule is supplied. Its wording is not proof that one is attached to a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 22,
+              "quote": "schedule of condition attached to this Lease in any better\nstate of repair and condition than evidenced in that schedule"
+            }
+          ]
+        },
+        "c53": {
+          "value": "Conditional reinstatement (draft obligation)",
+          "status": "extracted",
+          "explanation": "The end-of-term clause requires removal of Permitted Works unless landlord and tenant otherwise agree, and making good/restoring the pre-installation configuration. Confirm retained options and any actual licence or variation before applying it to specific works.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 24,
+              "quote": "unless and to the extent that the Landlord and the Tenant otherwise agree,\nall Permitted Works;"
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 24,
+              "quote": "restore them to the same configuration, state\nand condition as they were in before the items removed were originally installed."
+            }
+          ]
+        },
+        "c54": {
+          "value": "Whole assignment with consent; underletting subject to selected options",
+          "status": "optional",
+          "explanation": "Assignment of the whole is permitted with landlord consent and conditions (including AGA/security where required). Part assignment is not authorised. The optional underletting schedule permits whole/Permitted Part alternatives with consent and an Approved Underlease/Undertenant; the bracketed underletting choices remain unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 26,
+              "quote": "The Tenant may, with the Landlord’s consent, assign the whole of the Premises."
+            },
+            {
+              "documentId": "mcl-office-02",
+              "page": 70,
+              "quote": "Tenant may, with the Landlord’s consent, underlet the\nwhole of the Premises [or the whole of a Permitted Part]"
+            }
+          ]
+        },
+        "c55": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No transaction-specific side letter or variation is identified or linked. References to supplemental documents and prior leases are generic/blank; they do not establish either their existence or their absence in an actual transaction.",
+          "evidence": []
+        },
+        "c56": {
+          "value": "Unused MCL template — no executed tenancy or cashflow established",
+          "status": "extracted",
+          "explanation": "MCL version 1.9 is expressly intended as a template. Names, addresses, rents and dates remain placeholders; optional clauses must be selected before use. The part-building form has a separate service-charge mechanism and excludes structural parts from the demise. This row describes only this supplied lease, not other standalone templates.",
+          "evidence": [
+            {
+              "documentId": "mcl-office-02",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mcl-retail-01",
+      "documentId": "mcl-retail-01",
+      "title": "Whole retail lease",
+      "category": "retail",
+      "cells": {
+        "c01": {
+          "value": 3,
+          "status": "derived",
+          "explanation": "Assigned display row number; not a term extracted from the document.",
+          "evidence": []
+        },
+        "c02": {
+          "value": "Retail",
+          "status": "extracted",
+          "explanation": "The cover identifies the intended asset category. This identifies a template type, not an occupied asset.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "WHOLE (RETAIL)"
+            }
+          ]
+        },
+        "c03": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The premises address is a drafting placeholder. Obtain the completed demise and lease plan to identify a real unit.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 11,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            }
+          ]
+        },
+        "c04": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The whole-building demise has an address placeholder; no actual building name is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 11,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 11,
+              "quote": "all buildings from time to time on the Premises and the load-bearing walls, structure,\nfoundations and roofs of those buildings;"
+            }
+          ]
+        },
+        "c05": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No specific unit or suite identifier is provided. The completed premises description and lease plan are required.",
+          "evidence": []
+        },
+        "c06": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No actual floor number or floor list is completed. Generic references to floors in demise/underletting clauses do not identify the occupied floors.",
+          "evidence": []
+        },
+        "c07": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measured floor area is stated. Obtain the completed lease plan or measured survey; do not treat a building or unit template as an area measurement.",
+          "evidence": []
+        },
+        "c08": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No confirmed NIA, GIA or IPMS measurement basis is stated for an actual unit. A measured survey or agreed area schedule is required.",
+          "evidence": []
+        },
+        "c09": {
+          "value": "Retail description blank; approved alternative retail use",
+          "status": "placeholder",
+          "explanation": "The goods/use description remains [DESCRIPTION]. The following alternative-use clause retains optional tenant-mix policy wording and unselected E(a)/E(c) or A1(a)/A2 classes; no particular business use is confirmed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 10,
+              "quote": "the [non-food][retail sale] of [DESCRIPTION]; or"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 11,
+              "quote": "any other [non-food][retail] use"
+            }
+          ]
+        },
+        "c10": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The template refers to parking but supplies no confirmed demised/licensed space count. A completed plan or parking licence is required; absence of a count does not mean zero.",
+          "evidence": []
+        },
+        "c11": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No EPC certificate or A–G rating is supplied. EPC definitions and obligations are not an actual property rating.",
+          "evidence": []
+        },
+        "c12": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No dated EPC certificate is supplied, so its expiry cannot be established.",
+          "evidence": []
+        },
+        "c13": {
+          "value": null,
+          "status": "not_applicable",
+          "explanation": "This is an unused template, not evidence that a real unit is let or vacant. A current tenancy schedule or executed lease and occupancy evidence is required.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c14": {
+          "value": "[TENANT]",
+          "status": "placeholder",
+          "explanation": "LR3 leaves the tenant legal name uncompleted. No current tenant is identified.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 4,
+              "quote": "Tenant [TENANT]"
+            }
+          ]
+        },
+        "c15": {
+          "value": "[COMPANY NUMBER]",
+          "status": "placeholder",
+          "explanation": "The tenant registration number in LR3 is a placeholder; verify the completed tenant identity and registration.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in\n[England and Wales] [the United Kingdom]\n[COUNTRY] under company registration number\n[COMPANY NUMBER])"
+            }
+          ]
+        },
+        "c16": {
+          "value": "[GUARANTOR] (optional)",
+          "status": "optional",
+          "explanation": "The optional guarantor block in LR3 is uncompleted. Its presence in the template does not establish that a guarantor exists for a transaction.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 4,
+              "quote": "[Guarantor [GUARANTOR]"
+            }
+          ]
+        },
+        "c17": {
+          "value": "Lease of a whole building — template",
+          "status": "extracted",
+          "explanation": "The supplied occupational form is a lease template; it is not a licence or agreement for lease. Any optional headlease wording does not identify a completed superior-title arrangement.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "WHOLE (RETAIL)"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 15,
+              "quote": "The Landlord leases the Premises to the Tenant"
+            }
+          ]
+        },
+        "c18": {
+          "value": "Unselected contracting-out option",
+          "status": "optional",
+          "explanation": "The contracting-out clause and statutory-notice/declaration dates remain uncompleted. Do not classify the actual tenancy as In or Out without the executed lease, warning notice and declaration.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 31,
+              "quote": "a statutory declaration dated [DATE]"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 31,
+              "quote": "the provisions of sections 24–\n28 (inclusive) of the 1954 Act do not apply to the tenancy created by this Lease."
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c19": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term commencement date is [●]; it cannot be derived from the template version date or rent-commencement placeholder.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c20": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional Break Date definition contains [DATE OR DATES] and alternative rolling-date wording. No actual break date is selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 7,
+              "quote": "[DATE OR DATES]"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 34,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c21": {
+          "value": "Tenant (optional break clause)",
+          "status": "optional",
+          "explanation": "Clause 8 offers a tenant break only if retained in the completed lease. The landlord’s ability to waive conditions is not a landlord break right. Separate damage-termination rights are not scheduled contractual breaks.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 34,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c22": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional tenant break requires a notice period expressed as [LENGTH] months; no number is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 34,
+              "quote": "formal notice\nof not less than [LENGTH] months’"
+            }
+          ]
+        },
+        "c23": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional break-payment condition leaves the figure or proportion of Main Rent blank. Do not record a zero penalty or calculate a payment without a completed clause and rent.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 35,
+              "quote": "[insert figure/proportion of the Main Rent] (plus any VAT payable on that amount).]]"
+            }
+          ]
+        },
+        "c24": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The contractual expiry date is [●]. The blank term length and start date do not permit a calculation.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c25": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Review Date is optional and expressed as [DATE] in [YEARS]. No next review date is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 12,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c26": {
+          "value": "5 yearly / none (unselected)",
+          "status": "optional",
+          "explanation": "The cover offers five-yearly reviews or none, while the definition leaves review years blank. This is not an agreed review cycle.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "Rent review pattern [5 yearly][None]"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 12,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c27": {
+          "value": "Open market (optional template mechanism)",
+          "status": "optional",
+          "explanation": "Schedule 2 contains an open-market review mechanism. The cover retains open-market, index-linked RPI/CPI and stepped alternatives, so the transaction’s review basis has not been selected. No standalone clause template is incorporated by this extraction.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 40,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket on the Rent Review Date"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c28": {
+          "value": "Conditional upward-only",
+          "status": "optional",
+          "explanation": "If Schedule 2 is retained, the reviewed Main Rent is the higher of the previous Main Rent and Market Rent. The cover alternatives and optional review wording prevent treating this as a confirmed term for a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 40,
+              "quote": "On the Rent Review Date, the Main Rent is to be reviewed to the higher of:"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 40,
+              "quote": "the Main Rent reserved immediately before the Rent Review Date; and"
+            }
+          ]
+        },
+        "c29": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review cap is specified in this lease. The cover’s index-linked option does not incorporate the separate index-linked clause template or supply a cap.",
+          "evidence": []
+        },
+        "c30": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review collar is specified. The open-market upward-only mechanism is not a stated percentage collar; a selected review clause is required.",
+          "evidence": []
+        },
+        "c31": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover offers no rent-free period or an unspecified number of months. Neither a period nor its start date is selected; do not assume that the lease start creates a rent-free incentive.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c32": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Commencement Date is [DATE OR DESCRIPTION] and may be deferred under the damage provisions. With the rent-free option unresolved, no rent-free end date can be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 12,
+              "quote": "“Rent Commencement Date”\n[DATE OR DESCRIPTION]"
+            }
+          ]
+        },
+        "c33": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The draft waives Main Rent before Rent Commencement Date, but the cover leaves the existence/duration of a rent-free incentive unselected. This is not a confirmed 100% incentive; Insurance Rent and any Service Charge have separate provisions.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 16,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c34": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No landlord capital contribution amount is stated. Obtain an executed agreement for lease or side letter; the unrelated agreement-for-lease template is not a linked transaction document.",
+          "evidence": []
+        },
+        "c35": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Annual Main Rent is explicitly an amount placeholder; no actual contracted rent is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 10,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c36": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate contracted rent per square foot: both annual Main Rent (c35) and measured unit area (c07) are unknown. Required formula: annual rent ÷ area; no default zero is used.",
+          "evidence": []
+        },
+        "c37": {
+          "value": "Monthly / quarterly (unselected)",
+          "status": "optional",
+          "explanation": "Clause 3.6 and the Rent Days definition leave monthly and quarterly alternatives in place. Neither payment frequency has been selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 16,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 12,
+              "quote": "[25 March, 24 June, 29 September and 25 December;][the first day of every month;]"
+            }
+          ]
+        },
+        "c38": {
+          "value": "Advance (template obligation)",
+          "status": "extracted",
+          "explanation": "Clause 3.6 requires Main Rent payments in advance in the draft. The payment frequency is still unselected and this is not evidence of actual payments.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 16,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c39": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Stepped rent is only an unselected cover option. No selected step schedule or effective step date is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c40": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No stepped annual rent amounts are supplied. A completed stepped-rent schedule is required; the Main Rent placeholder cannot provide them.",
+          "evidence": []
+        },
+        "c41": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate stepped rent per square foot: stepped annual rent (c40) and measured area (c07) are unknown.",
+          "evidence": []
+        },
+        "c42": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The optional turnover-information clause requires reporting of daily gross turnover, not payment of a percentage of turnover as rent. No turnover-rent rate or incorporated turnover-rent schedule is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 25,
+              "quote": "details of daily gross turnover by means of the\nlink provided by the Landlord"
+            }
+          ]
+        },
+        "c43": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No valuation or letting advice supplies an ERV. The defined hypothetical Market Rent used at future rent review is not a current estimated-rental-value figure.",
+          "evidence": []
+        },
+        "c44": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate ERV per square foot without a valuation/letting-advice ERV (c43) and measured area (c07).",
+          "evidence": []
+        },
+        "c45": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No annual service-charge figure is stated for this whole-building draft. The Outgoings definition includes shared Common Facilities costs, which does not establish a fixed annual service charge; obtain the relevant demands/budget.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 10,
+              "quote": "all costs and expenses for which the Landlord, any other owner or the occupier of\nthe Premises is responsible in respect of the Common Facilities;"
+            }
+          ]
+        },
+        "c46": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate service charge per square foot without an annual charge (c45) and measured area (c07).",
+          "evidence": []
+        },
+        "c47": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No agreed service-charge monetary cap is specified. The separate service-charge-cap clause template is not a linked variation or incorporated term.",
+          "evidence": []
+        },
+        "c48": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge minimum/collar amount is specified. A completed lease or applicable side letter is needed before recording one.",
+          "evidence": []
+        },
+        "c49": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The draft requires the specified insurance costs to be paid on demand, but supplies no annual insurance premium or rent amount. Obtain the policy schedule and demand.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 42,
+              "quote": "The Tenant must pay on demand:\n2.1.1 the whole of:"
+            }
+          ]
+        },
+        "c50": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No current cash deposit balance is stated. The assignment provisions contemplate a future assignee deposit of not less than [six] months’ Main Rent if required; this is neither an agreed current deposit nor a completed amount. No separate deposit template is treated as linked.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 23,
+              "quote": "a rent deposit deed with the Landlord\nproviding for a deposit of not less than [six] months’ Main Rent"
+            }
+          ]
+        },
+        "c51": {
+          "value": "Whole-demise repair + insurance contribution; classification requires review",
+          "status": "needs_review",
+          "explanation": "The premises include structure, foundations and roofs and the draft imposes good/substantial repair plus insurance contribution. Insured/uninsured damage exclusions and an optional schedule-of-condition limit mean the agreed liability must be reviewed before calling an actual lease FRI.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 11,
+              "quote": "all buildings from time to time on the Premises and the load-bearing walls, structure,\nfoundations and roofs of those buildings;"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 18,
+              "quote": "keep the Premises clean and tidy and in good and substantial repair and\ncondition;"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 42,
+              "quote": "The Tenant must pay on demand:\n2.1.1 the whole of:"
+            }
+          ]
+        },
+        "c52": {
+          "value": "Optional — not confirmed",
+          "status": "optional",
+          "explanation": "A bracketed repairing-liability limitation refers to a schedule of condition, but the option is not selected and no completed condition schedule is supplied. Its wording is not proof that one is attached to a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 18,
+              "quote": "schedule of\ncondition attached to this Lease in any better state of repair and condition than\nevidenced in that schedule"
+            }
+          ]
+        },
+        "c53": {
+          "value": "Conditional reinstatement (draft obligation)",
+          "status": "extracted",
+          "explanation": "The end-of-term clause requires removal of Permitted Works unless landlord and tenant otherwise agree, and making good/restoring the pre-installation configuration. Confirm retained options and any actual licence or variation before applying it to specific works.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 20,
+              "quote": "unless and to the extent that the Landlord and the Tenant otherwise agree,\nall Permitted Works;"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 20,
+              "quote": "restore them to the same configuration, state and condition\nas they were in before the items removed were originally installed."
+            }
+          ]
+        },
+        "c54": {
+          "value": "Whole assignment with consent; optional underletting and initial bar",
+          "status": "optional",
+          "explanation": "The retail draft allows assignment of the whole with consent and conditions (including AGA/security where required), but also retains an optional first-three-years bar. The optional underletting schedule permits whole/Permitted Part alternatives with consent and approved documentation. Part assignment is not authorised; none of the bracketed choices is confirmed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 22,
+              "quote": "The Tenant may, with the Landlord’s consent, assign the whole of the Premises."
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 22,
+              "quote": "during the first three years of the Term.]"
+            },
+            {
+              "documentId": "mcl-retail-01",
+              "page": 52,
+              "quote": "Tenant may, with the Landlord’s consent, underlet the\nwhole of the Premises [or the whole of a Permitted Part]"
+            }
+          ]
+        },
+        "c55": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No transaction-specific side letter or variation is identified or linked. References to supplemental documents and prior leases are generic/blank; they do not establish either their existence or their absence in an actual transaction.",
+          "evidence": []
+        },
+        "c56": {
+          "value": "Unused MCL template — no executed tenancy or cashflow established",
+          "status": "extracted",
+          "explanation": "MCL version 1.9 is expressly intended as a template. Names, addresses, rents and dates remain placeholders; optional clauses must be selected before use. The whole-building form includes structure, foundations and roofs in the demise. Retail-specific optional provisions include a first-three-years alienation bar and turnover reporting, which is not turnover rent. This row describes only this supplied lease, not other standalone templates.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mcl-retail-02",
+      "documentId": "mcl-retail-02",
+      "title": "Part of building retail lease",
+      "category": "retail",
+      "cells": {
+        "c01": {
+          "value": 4,
+          "status": "derived",
+          "explanation": "Assigned display row number; not a term extracted from the document.",
+          "evidence": []
+        },
+        "c02": {
+          "value": "Retail",
+          "status": "extracted",
+          "explanation": "The cover identifies the intended asset category. This identifies a template type, not an occupied asset.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "PART OF BUILDING (RETAIL)"
+            }
+          ]
+        },
+        "c03": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The premises address is a drafting placeholder. Obtain the completed demise and lease plan to identify a real unit.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 13,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            }
+          ]
+        },
+        "c04": {
+          "value": "[BUILDING DESCRIPTION]",
+          "status": "placeholder",
+          "explanation": "The Building definition is not completed; the document describes a letting of part, not the entire building.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 8,
+              "quote": "the building known as [BUILDING DESCRIPTION]"
+            }
+          ]
+        },
+        "c05": {
+          "value": "[DETAILS]",
+          "status": "placeholder",
+          "explanation": "The cover leaves the retail unit details blank. A completed lease/plan is needed for its unit or suite identifier.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "retail unit [DETAILS]"
+            }
+          ]
+        },
+        "c06": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No actual floor number or floor list is completed. Generic references to floors in demise/underletting clauses do not identify the occupied floors.",
+          "evidence": []
+        },
+        "c07": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measured floor area is stated. Obtain the completed lease plan or measured survey; do not treat a building or unit template as an area measurement.",
+          "evidence": []
+        },
+        "c08": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No confirmed NIA, GIA or IPMS measurement basis is stated for an actual unit. A measured survey or agreed area schedule is required.",
+          "evidence": []
+        },
+        "c09": {
+          "value": "Retail description blank; approved alternative use subject to tenant-mix policy",
+          "status": "placeholder",
+          "explanation": "The goods/use description remains [DESCRIPTION]. Other retail use requires landlord approval and compliance with the retail/tenant-mix policy; E(a)/E(c) or A1(a)/A2 are unselected class alternatives.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 12,
+              "quote": "the [non-food][retail sale] of [DESCRIPTION]; or"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 12,
+              "quote": "any other [non-food][retail] use complying with the Landlord’s retail and tenant mix\npolicy"
+            }
+          ]
+        },
+        "c10": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Staff-parking rights are optional, with non-designated and designated-space alternatives. Neither the chosen option nor an actual number of spaces is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 43,
+              "quote": "Option 1: Non-designated spaces for parking"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 43,
+              "quote": "Option 2: Designated spaces for parking subject to a right to move those spaces"
+            }
+          ]
+        },
+        "c11": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No EPC certificate or A–G rating is supplied. EPC definitions and obligations are not an actual property rating.",
+          "evidence": []
+        },
+        "c12": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No dated EPC certificate is supplied, so its expiry cannot be established.",
+          "evidence": []
+        },
+        "c13": {
+          "value": null,
+          "status": "not_applicable",
+          "explanation": "This is an unused template, not evidence that a real unit is let or vacant. A current tenancy schedule or executed lease and occupancy evidence is required.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c14": {
+          "value": "[TENANT]",
+          "status": "placeholder",
+          "explanation": "LR3 leaves the tenant legal name uncompleted. No current tenant is identified.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 4,
+              "quote": "Tenant [TENANT]"
+            }
+          ]
+        },
+        "c15": {
+          "value": "[COMPANY NUMBER]",
+          "status": "placeholder",
+          "explanation": "The tenant registration number in LR3 is a placeholder; verify the completed tenant identity and registration.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in\n[England and Wales] [the United Kingdom]\n[COUNTRY] under company registration number\n[COMPANY NUMBER])"
+            }
+          ]
+        },
+        "c16": {
+          "value": "[GUARANTOR] (optional)",
+          "status": "optional",
+          "explanation": "The optional guarantor block in LR3 is uncompleted. Its presence in the template does not establish that a guarantor exists for a transaction.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 4,
+              "quote": "[Guarantor [GUARANTOR]"
+            }
+          ]
+        },
+        "c17": {
+          "value": "Lease of part of a building — template",
+          "status": "extracted",
+          "explanation": "The supplied occupational form is a lease template; it is not a licence or agreement for lease. Any optional headlease wording does not identify a completed superior-title arrangement.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "PART OF BUILDING (RETAIL)"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 18,
+              "quote": "The Landlord leases the Premises to the Tenant"
+            }
+          ]
+        },
+        "c18": {
+          "value": "Unselected contracting-out option",
+          "status": "optional",
+          "explanation": "The contracting-out clause and statutory-notice/declaration dates remain uncompleted. Do not classify the actual tenancy as In or Out without the executed lease, warning notice and declaration.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 37,
+              "quote": "a statutory declaration dated [DATE]"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 37,
+              "quote": "the provisions of sections 24–\n28 (inclusive) of the 1954 Act do not apply to the tenancy created by this Lease."
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c19": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term commencement date is [●]; it cannot be derived from the template version date or rent-commencement placeholder.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 9,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c20": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional Break Date definition contains [DATE OR DATES] and alternative rolling-date wording. No actual break date is selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 8,
+              "quote": "[DATE OR DATES]"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 40,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c21": {
+          "value": "Tenant (optional break clause)",
+          "status": "optional",
+          "explanation": "Clause 8 offers a tenant break only if retained in the completed lease. The landlord’s ability to waive conditions is not a landlord break right. Separate damage-termination rights are not scheduled contractual breaks.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 40,
+              "quote": "The Tenant may end the Term on [any][the] Break Date"
+            }
+          ]
+        },
+        "c22": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The optional tenant break requires a notice period expressed as [LENGTH] months; no number is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 40,
+              "quote": "formal notice\nof not less than [LENGTH] months’"
+            }
+          ]
+        },
+        "c23": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional break-payment condition leaves the figure or proportion of Main Rent blank. Do not record a zero penalty or calculate a payment without a completed clause and rent.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 40,
+              "quote": "[insert figure/proportion of the Main Rent] (plus any VAT payable on that amount).]]"
+            }
+          ]
+        },
+        "c24": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The contractual expiry date is [●]. The blank term length and start date do not permit a calculation.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 9,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c25": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Review Date is optional and expressed as [DATE] in [YEARS]. No next review date is completed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 14,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c26": {
+          "value": "5 yearly / none (unselected)",
+          "status": "optional",
+          "explanation": "The cover offers five-yearly reviews or none, while the definition leaves review years blank. This is not an agreed review cycle.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "Rent review pattern [5 yearly][None]"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 14,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c27": {
+          "value": "Open market (optional template mechanism)",
+          "status": "optional",
+          "explanation": "Schedule 2 contains an open-market review mechanism. The cover retains open-market, index-linked RPI/CPI and stepped alternatives, so the transaction’s review basis has not been selected. No standalone clause template is incorporated by this extraction.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 48,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket on the Rent Review Date"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c28": {
+          "value": "Conditional upward-only",
+          "status": "optional",
+          "explanation": "If Schedule 2 is retained, the reviewed Main Rent is the higher of the previous Main Rent and Market Rent. The cover alternatives and optional review wording prevent treating this as a confirmed term for a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 48,
+              "quote": "On the Rent Review Date, the Main Rent is to be reviewed to the higher of:"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 48,
+              "quote": "the Main Rent reserved immediately before the Rent Review Date; and"
+            }
+          ]
+        },
+        "c29": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review cap is specified in this lease. The cover’s index-linked option does not incorporate the separate index-linked clause template or supply a cap.",
+          "evidence": []
+        },
+        "c30": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numerical index-review collar is specified. The open-market upward-only mechanism is not a stated percentage collar; a selected review clause is required.",
+          "evidence": []
+        },
+        "c31": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover offers no rent-free period or an unspecified number of months. Neither a period nor its start date is selected; do not assume that the lease start creates a rent-free incentive.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c32": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Rent Commencement Date is [DATE OR DESCRIPTION] and may be deferred under the damage provisions. With the rent-free option unresolved, no rent-free end date can be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 14,
+              "quote": "“Rent Commencement Date”\n[DATE OR DESCRIPTION]"
+            }
+          ]
+        },
+        "c33": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The draft waives Main Rent before Rent Commencement Date, but the cover leaves the existence/duration of a rent-free incentive unselected. This is not a confirmed 100% incentive; Insurance Rent and any Service Charge have separate provisions.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 18,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            }
+          ]
+        },
+        "c34": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No landlord capital contribution amount is stated. Obtain an executed agreement for lease or side letter; the unrelated agreement-for-lease template is not a linked transaction document.",
+          "evidence": []
+        },
+        "c35": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Annual Main Rent is explicitly an amount placeholder; no actual contracted rent is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 11,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c36": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate contracted rent per square foot: both annual Main Rent (c35) and measured unit area (c07) are unknown. Required formula: annual rent ÷ area; no default zero is used.",
+          "evidence": []
+        },
+        "c37": {
+          "value": "Monthly / quarterly (unselected)",
+          "status": "optional",
+          "explanation": "Clause 3.6 and the Rent Days definition leave monthly and quarterly alternatives in place. Neither payment frequency has been selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 19,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 14,
+              "quote": "[25 March, 24 June, 29 September and 25 December;][the first day of every month;]"
+            }
+          ]
+        },
+        "c38": {
+          "value": "Advance (template obligation)",
+          "status": "extracted",
+          "explanation": "Clause 3.6 requires Main Rent payments in advance in the draft. The payment frequency is still unselected and this is not evidence of actual payments.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 19,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c39": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Stepped rent is only an unselected cover option. No selected step schedule or effective step date is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c40": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No stepped annual rent amounts are supplied. A completed stepped-rent schedule is required; the Main Rent placeholder cannot provide them.",
+          "evidence": []
+        },
+        "c41": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate stepped rent per square foot: stepped annual rent (c40) and measured area (c07) are unknown.",
+          "evidence": []
+        },
+        "c42": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The optional turnover-information clause requires reporting of daily gross turnover, not payment of a percentage of turnover as rent. No turnover-rent rate or incorporated turnover-rent schedule is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 29,
+              "quote": "details of daily gross turnover by means of the\nlink provided by the Landlord"
+            }
+          ]
+        },
+        "c43": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No valuation or letting advice supplies an ERV. The defined hypothetical Market Rent used at future rent review is not a current estimated-rental-value figure.",
+          "evidence": []
+        },
+        "c44": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate ERV per square foot without a valuation/letting-advice ERV (c43) and measured area (c07).",
+          "evidence": []
+        },
+        "c45": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The lease provides a service-charge mechanism based on a fair proportion of Service Costs, but no annual budget, apportionment amount or demand. Obtain these documents to establish the annual charge.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 14,
+              "quote": "a fair proportion (calculated on a floor area basis or any other method as the Landlord decides\nfrom time to time) of the Service Costs"
+            }
+          ]
+        },
+        "c46": {
+          "value": null,
+          "status": "derived",
+          "explanation": "Cannot calculate service charge per square foot without an annual charge (c45) and measured area (c07).",
+          "evidence": []
+        },
+        "c47": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No agreed service-charge monetary cap is specified. A drafting footnote directs the author to another MCL clause only if a cap has been agreed; this does not incorporate that separate template or establish an agreed cap.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 50,
+              "quote": "If the Landlord has agreed to cap the amount of service charge payable by the Tenant, please refer to the Model\nCommercial Lease: Index Linked Service Charge Cap clause (MCL-LEASECLAUSE-05)."
+            }
+          ]
+        },
+        "c48": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge minimum/collar amount is specified. A completed lease or applicable side letter is needed before recording one.",
+          "evidence": []
+        },
+        "c49": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The draft requires an apportioned contribution to insurance costs, but contains no annual premium, selected apportionment or demand amount. Obtain the insurance schedule/demand.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 57,
+              "quote": "The Tenant must pay on demand:\n2.1.1 a fair and reasonable proportion of:"
+            }
+          ]
+        },
+        "c50": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No current cash deposit balance is stated. The assignment provisions contemplate a future assignee deposit of not less than [six] months’ Main Rent if required; this is neither an agreed current deposit nor a completed amount. No separate deposit template is treated as linked.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 26,
+              "quote": "a rent deposit deed with the Landlord\nproviding for a deposit of not less than [six] months’ Main Rent"
+            }
+          ]
+        },
+        "c51": {
+          "value": "Demised-part repair + service charge; classification requires review",
+          "status": "needs_review",
+          "explanation": "The tenant repairs the defined premises and External Works; structural parts are excluded from the demise. Building costs are dealt with through Service Charge and apportioned insurance. Exact inclusions, damage exceptions and the optional condition limitation must be resolved before assigning a simple FRI/IRI classification.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 20,
+              "quote": "keep the Premises and any External Works clean and tidy and in good and\nsubstantial repair and condition;"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 13,
+              "quote": "all structural parts of the Building;"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 14,
+              "quote": "a fair proportion (calculated on a floor area basis or any other method as the Landlord decides\nfrom time to time) of the Service Costs"
+            }
+          ]
+        },
+        "c52": {
+          "value": "Optional — not confirmed",
+          "status": "optional",
+          "explanation": "A bracketed repairing-liability limitation refers to a schedule of condition, but the option is not selected and no completed condition schedule is supplied. Its wording is not proof that one is attached to a real lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 21,
+              "quote": "schedule of condition attached to this Lease in any better\nstate of repair and condition than evidenced in that schedule"
+            }
+          ]
+        },
+        "c53": {
+          "value": "Conditional reinstatement (draft obligation)",
+          "status": "extracted",
+          "explanation": "The end-of-term clause requires removal of Permitted Works unless landlord and tenant otherwise agree, and making good/restoring the pre-installation configuration. Confirm retained options and any actual licence or variation before applying it to specific works.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 23,
+              "quote": "unless and to the extent that the Landlord and the Tenant otherwise agree,\nall Permitted Works;"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 23,
+              "quote": "restore them to the same configuration, state\nand condition as they were in before the items removed were originally installed."
+            }
+          ]
+        },
+        "c54": {
+          "value": "Whole assignment with consent; optional underletting and initial bar",
+          "status": "optional",
+          "explanation": "The retail draft allows assignment of the whole with consent and conditions (including AGA/security where required), but also retains an optional first-three-years bar. The optional underletting schedule permits whole/Permitted Part alternatives with consent and approved documentation. Part assignment is not authorised; none of the bracketed choices is confirmed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 26,
+              "quote": "The Tenant may, with the Landlord’s consent, assign the whole of the Premises."
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 26,
+              "quote": "during the first three years of the Term.]"
+            },
+            {
+              "documentId": "mcl-retail-02",
+              "page": 70,
+              "quote": "Tenant may, with the Landlord’s consent, underlet the\nwhole of the Premises [or the whole of a Permitted Part]"
+            }
+          ]
+        },
+        "c55": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No transaction-specific side letter or variation is identified or linked. References to supplemental documents and prior leases are generic/blank; they do not establish either their existence or their absence in an actual transaction.",
+          "evidence": []
+        },
+        "c56": {
+          "value": "Unused MCL template — no executed tenancy or cashflow established",
+          "status": "extracted",
+          "explanation": "MCL version 1.9 is expressly intended as a template. Names, addresses, rents and dates remain placeholders; optional clauses must be selected before use. The part-building form has a separate service-charge mechanism and excludes structural parts from the demise. Retail-specific optional provisions include a first-three-years alienation bar and turnover reporting, which is not turnover rent. This row describes only this supplied lease, not other standalone templates.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-02",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mcl-retail-07",
+      "documentId": "mcl-retail-07",
+      "title": "MCL Retail 07 — Shopping-centre retail lease",
+      "category": "retail",
+      "cells": {
+        "c01": {
+          "value": 5,
+          "status": "derived",
+          "explanation": "Assigned display row for this source template; it is not a property or lease identifier.",
+          "evidence": []
+        },
+        "c02": {
+          "value": "Retail",
+          "status": "extracted",
+          "explanation": "Asset category is explicitly identified on the template cover.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "SHOPPING CENTRE (RETAIL)"
+            }
+          ]
+        },
+        "c03": {
+          "value": "Unit [NUMBER]",
+          "status": "placeholder",
+          "explanation": "The cover gives an unfilled unit name/number; the premises address is also a placeholder.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "Relating to premises known as Unit [NUMBER]"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 14,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            }
+          ]
+        },
+        "c04": {
+          "value": "[CENTRE DESCRIPTION]",
+          "status": "placeholder",
+          "explanation": "The shopping-centre identity is left blank in the Centre definition.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 8,
+              "quote": "shopping centre known as [CENTRE DESCRIPTION]"
+            }
+          ]
+        },
+        "c05": {
+          "value": "Unit [NUMBER]",
+          "status": "placeholder",
+          "explanation": "The cover identifies an unfilled unit number; no actual suite is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "Relating to premises known as Unit [NUMBER]"
+            }
+          ]
+        },
+        "c06": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No actual floor or floor range for the demise is specified; generic references to floors do not identify a floor.",
+          "evidence": []
+        },
+        "c07": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measured area for the unit is supplied. Schedule 3 contains illustrative area bands for service-charge weighting, not the area of this demise.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 57,
+              "quote": "[First 500 square metres (5,382 square feet)] [100]"
+            }
+          ]
+        },
+        "c08": {
+          "value": "GIA / equivalent IPMS — optional service-charge basis",
+          "status": "optional",
+          "explanation": "The optional Gross Internal Area definition applies to service-charge weighting; it does not certify the measurement basis or size of an actual unit.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 11,
+              "quote": "the gross internal area (or, when implemented, the equivalent International Property\nMeasurement Standard)"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 11,
+              "quote": "This definition is required only where service charge weighting applies."
+            }
+          ]
+        },
+        "c09": {
+          "value": "Retail use; description and use-class alternatives unselected",
+          "status": "optional",
+          "explanation": "The Permitted Use definition contains unselected drafting alternatives. This is a summary of the available wording, not a confirmed use for an occupied unit.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 13,
+              "quote": "the [non-food][retail sale] of [DESCRIPTION]; or"
+            }
+          ]
+        },
+        "c10": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Optional staff-parking alternatives offer non-designated spaces or [NUMBER] vehicles. No actual allocation or count is selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 44,
+              "quote": "8. [Staff parking"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 44,
+              "quote": "for the parking of [NUMBER] vehicles"
+            }
+          ]
+        },
+        "c11": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The lease refers to EPC obligations but supplies no EPC certificate or actual A–G rating.",
+          "evidence": []
+        },
+        "c12": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No EPC issue or expiry date appears; no certificate has been supplied for this template.",
+          "evidence": []
+        },
+        "c13": {
+          "value": null,
+          "status": "not_applicable",
+          "explanation": "This is an unused lease template, not evidence of an occupied or vacant unit. Occupancy cannot be marked Y or N.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c14": {
+          "value": "[TENANT]",
+          "status": "placeholder",
+          "explanation": "LR3 leaves the tenant legal entity blank. No current tenant is identified.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in"
+            }
+          ]
+        },
+        "c15": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The tenant company number is unfilled in LR3; it is not a registration number.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in\n[England and Wales] [the United Kingdom]\n[COUNTRY] under company registration number\n[COMPANY NUMBER])"
+            }
+          ]
+        },
+        "c16": {
+          "value": "[GUARANTOR] — optional",
+          "status": "optional",
+          "explanation": "Both the guarantor identity and inclusion of a guarantor remain unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 4,
+              "quote": "[Guarantor [GUARANTOR]"
+            }
+          ]
+        },
+        "c17": {
+          "value": "Commercial lease template",
+          "status": "extracted",
+          "explanation": "The source is a lease-form template, not an agreement for lease, licence, or executed occupational lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "LEASE"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c18": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Contracting-out wording is optional and notice/declaration dates are unfilled. The template does not establish an actual In/Out status.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 38,
+              "quote": "[Contracting-out"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 38,
+              "quote": "28 (inclusive) of the 1954 Act do not apply to the tenancy created by this Lease."
+            }
+          ]
+        },
+        "c19": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term start date is unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 10,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c20": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The break right is optional and its date(s) remain placeholders.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 8,
+              "quote": "[“Break Date”"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 8,
+              "quote": "[DATE OR DATES]"
+            }
+          ]
+        },
+        "c21": {
+          "value": "Tenant — if optional clause retained",
+          "status": "optional",
+          "explanation": "Clause 8 gives the tenant the optional break. This does not assert an effective break right in a completed lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 41,
+              "quote": "The Tenant may end the Term on [any][the] Break Date by giving the Landlord formal notice"
+            }
+          ]
+        },
+        "c22": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The optional break notice period is [LENGTH] months; no numeric period has been selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 41,
+              "quote": "of not less than [LENGTH] months’"
+            }
+          ]
+        },
+        "c23": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional break payment is described as a figure/proportion of Main Rent, but neither inclusion nor amount is agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 42,
+              "quote": "[insert figure/proportion of the Main Rent]"
+            }
+          ]
+        },
+        "c24": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term end date is unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 10,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c25": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Review is optional and both the day/month and review years are unfilled; no next review date can be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 15,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c26": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover leaves [5 yearly] and [None] unselected. Five-year wording in the hypothetical valuation lease does not establish the actual review schedule.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "Rent review pattern [5 yearly][None]"
+            }
+          ]
+        },
+        "c27": {
+          "value": "Open market — optional template mechanism",
+          "status": "optional",
+          "explanation": "Schedule 2 provides open-market review mechanics, while the cover retains alternative review types and inclusion remains unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 49,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c28": {
+          "value": "Yes — if Schedule 2 retained",
+          "status": "optional",
+          "explanation": "The supplied market-review mechanism selects the higher of passing Main Rent and Market Rent. It is not confirmation of an agreed live review.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 49,
+              "quote": "On the Rent Review Date, the Main Rent is to be reviewed to the higher of:"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 49,
+              "quote": "the Main Rent reserved immediately before the Rent Review Date; and"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 49,
+              "quote": "the Market Rent."
+            }
+          ]
+        },
+        "c29": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No indexed-review maximum uplift is set in this lease. A separate optional index-review document is not treated as incorporated.",
+          "evidence": []
+        },
+        "c30": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numeric indexed-review collar is set. Upward-only market review is described separately and is not an indexed percentage collar.",
+          "evidence": []
+        },
+        "c31": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover offers no rent-free period or an unfilled duration. The term start is unfilled, so no incentive start date is established.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 10,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c32": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Main Rent is not payable before the Rent Commencement Date, but that date is unfilled; a rent-free end date cannot be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 15,
+              "quote": "[DATE OR DESCRIPTION] or any later date calculated"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 20,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            }
+          ]
+        },
+        "c33": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The template waives Main Rent before commencement, but whether there is a rent-free period is unresolved. No actual incentive percentage is populated; ancillary rent has separate treatment.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 20,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            }
+          ]
+        },
+        "c34": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No landlord cash incentive or fit-out capital-contribution amount is specified. No agreement for lease or side letter is linked to this source.",
+          "evidence": []
+        },
+        "c35": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Annual Main Rent contains only amount placeholders. There is no current contracted rent for an occupied asset.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 12,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c36": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate contracted rent per square foot because annual rent and measured area are missing.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 12,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c37": {
+          "value": "Monthly / quarterly — unselected",
+          "status": "optional",
+          "explanation": "Both payment-frequency alternatives remain in clause 3.6; neither is treated as agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 20,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c38": {
+          "value": "Advance",
+          "status": "extracted",
+          "explanation": "Clause 3.6 expressly states payment in advance. This describes the template wording rather than an executed tenancy.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 20,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c39": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Stepped rent is merely an unselected cover alternative; no step date or actual stepped-rent schedule is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c40": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No populated stepped annual-rent amount is supplied.",
+          "evidence": []
+        },
+        "c41": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate stepped rent per square foot: both stepped rent and actual floor area are absent.",
+          "evidence": []
+        },
+        "c42": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No turnover-rent percentage is incorporated. A drafting note refers to a separate optional clause; that reference does not incorporate it.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 20,
+              "quote": "For Turnover Rent provisions, refer to the Model Commercial Lease: Turnover Rent clause"
+            }
+          ]
+        },
+        "c43": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No valuation or estimated market-rent amount is supplied. The Market Rent definition is a review mechanism, not a valuation.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 49,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket"
+            }
+          ]
+        },
+        "c44": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate estimated rental value per square foot because a valuation and measured floor area are missing.",
+          "evidence": []
+        },
+        "c45": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The service-charge mechanism is a fair proportion or optional Tenant’s Proportion of costs, with annual statements. No budget, actual service costs or annual tenant amount is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 15,
+              "quote": "“Service Charge”\n[a fair proportion (calculated on a floor area basis or any other method as the Landlord decides"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 51,
+              "quote": "After the end of each Accounting Period, the Landlord will supply the Tenant with a statement"
+            }
+          ]
+        },
+        "c46": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate service charge per square foot: no annual charge or actual floor area is supplied.",
+          "evidence": []
+        },
+        "c47": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "A footnote points to a separate service-charge-cap clause if a cap is agreed. It does not set or incorporate a cap in this lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 51,
+              "quote": "If the Landlord has agreed to cap the amount of service charge payable by the Tenant,"
+            }
+          ]
+        },
+        "c48": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge minimum/collar for this main lease is specified.",
+          "evidence": []
+        },
+        "c49": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Schedule 4 requires a fair/reasonable proportion of specified insurance costs, plus other specified costs, but states no actual premium or annual amount.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 58,
+              "quote": "The Tenant must pay on demand:"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 58,
+              "quote": "a fair and reasonable proportion of:"
+            }
+          ]
+        },
+        "c50": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The assignment clause may require a future assignee deposit based on [six] months’ rent. It does not show an existing cash deposit or a deposit deed for this tenant.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 27,
+              "quote": "the assignee enters into a rent deposit deed with the Landlord"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 27,
+              "quote": "providing for a deposit of not less than [six] months’ Main Rent"
+            }
+          ]
+        },
+        "c51": {
+          "value": "Demised-part repair + service charge",
+          "status": "needs_review",
+          "explanation": "The demise excludes structure, with a tenant repair covenant and centre service-charge obligations. Structural/common-part costs may flow through service charge. The optional condition limitation remains unresolved, so an unqualified FRI/IRI classification needs review.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 14,
+              "quote": "(b) excluding:"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 14,
+              "quote": "all structural parts of the Centre;"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 22,
+              "quote": "keep the Premises and any External Works clean and tidy and in good and\nsubstantial repair and condition;"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 20,
+              "quote": "The Tenant must pay the Service Charge in accordance with Part 1 of Schedule 3."
+            }
+          ]
+        },
+        "c52": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional schedule-of-condition limitation is included, but no completed condition schedule or final selection establishes that it applies.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 22,
+              "quote": "shown or described in the schedule of condition attached to this Lease in any better"
+            }
+          ]
+        },
+        "c53": {
+          "value": "Yes — subject to agreement",
+          "status": "extracted",
+          "explanation": "The template requires removal of permitted works unless landlord and tenant agree otherwise, plus making good. Actual alterations and any agreed exceptions are unknown.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 24,
+              "quote": "unless and to the extent that the Landlord and the Tenant otherwise agree,"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 24,
+              "quote": "all Permitted Works; and"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 25,
+              "quote": "restore them to the same configuration, state and\ncondition"
+            }
+          ]
+        },
+        "c54": {
+          "value": "Assign with consent; optional underletting and initial bar",
+          "status": "optional",
+          "explanation": "Assignment of the whole requires landlord consent and may require an AGA, guarantor or assignee deposit. Underletting is optional under the stated schedule, with consent and approved-underlease conditions. No actual assignment or underlease is supplied. The template also offers an optional ban on whole assignment (and optionally underletting whole or part) during the first three years; this has not been selected or agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 27,
+              "quote": "The Tenant may, with the Landlord’s consent, assign the whole of the Premises."
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 71,
+              "quote": "Tenant may, with the Landlord’s consent, underlet the\nwhole of the Premises"
+            },
+            {
+              "documentId": "mcl-retail-07",
+              "page": 27,
+              "quote": "[The Tenant must not assign the whole of the Premises [or underlet the Premises in\nwhole or in part] during the first three years of the Term.]"
+            }
+          ]
+        },
+        "c55": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No side letter or executed variation is linked to this template. Generic references to supplemental documents are not evidence that one exists.",
+          "evidence": []
+        },
+        "c56": {
+          "value": "Unused template — not an occupied asset or live rent roll",
+          "status": "extracted",
+          "explanation": "One row represents this source document. Party names, addresses, amounts and dates are unfilled, and optional terms remain unresolved. The extraction preserves template mechanics and does not invent portfolio data.",
+          "evidence": [
+            {
+              "documentId": "mcl-retail-07",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mcl-logistic-01",
+      "documentId": "mcl-logistic-01",
+      "title": "MCL Logistic 01 — Whole industrial / logistics lease",
+      "category": "logistics",
+      "cells": {
+        "c01": {
+          "value": 6,
+          "status": "derived",
+          "explanation": "Assigned display row for this source template; it is not a property or lease identifier.",
+          "evidence": []
+        },
+        "c02": {
+          "value": "Industrial / Logistics",
+          "status": "extracted",
+          "explanation": "Asset category is explicitly identified on the template cover.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "WHOLE (INDUSTRIAL/LOGISTICS)"
+            }
+          ]
+        },
+        "c03": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The premises definition contains an unfilled address rather than an actual unit name.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 12,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            }
+          ]
+        },
+        "c04": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "This is a whole-premises template, but the building address/name remains unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 12,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "WHOLE (INDUSTRIAL/LOGISTICS)"
+            }
+          ]
+        },
+        "c05": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No separate suite or unit number is identified in this whole-premises template.",
+          "evidence": []
+        },
+        "c06": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No actual floor or floor range for the demise is specified; generic references to floors do not identify a floor.",
+          "evidence": []
+        },
+        "c07": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measured floor area for the actual demise is supplied. No area is inferred from a generic clause or illustrative number.",
+          "evidence": []
+        },
+        "c08": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "GIA appears only in optional future-underletting definitions and size thresholds. It does not establish a measurement basis for an actual measured main demise.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 52,
+              "quote": "has a Gross Internal Area of not less than [NUMBER] square [feet] [metres]"
+            }
+          ]
+        },
+        "c09": {
+          "value": "Industrial / logistics and ancillary offices; description and class unselected",
+          "status": "optional",
+          "explanation": "The Permitted Use definition contains unselected drafting alternatives. This is a summary of the available wording, not a confirmed use for an occupied unit.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 11,
+              "quote": "the use of the Premises as [DESCRIPTION16] within Class [[E(g)(ii)][E(g)(iii)] of Part A of"
+            }
+          ]
+        },
+        "c10": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "An optional duty to mark parking areas does not establish any actual parking-space count.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 19,
+              "quote": "The Tenant must keep all car parking areas within the Premises suitably marked"
+            }
+          ]
+        },
+        "c11": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The lease refers to EPC obligations but supplies no EPC certificate or actual A–G rating.",
+          "evidence": []
+        },
+        "c12": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No EPC issue or expiry date appears; no certificate has been supplied for this template.",
+          "evidence": []
+        },
+        "c13": {
+          "value": null,
+          "status": "not_applicable",
+          "explanation": "This is an unused lease template, not evidence of an occupied or vacant unit. Occupancy cannot be marked Y or N.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c14": {
+          "value": "[TENANT]",
+          "status": "placeholder",
+          "explanation": "LR3 leaves the tenant legal entity blank. No current tenant is identified.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in"
+            }
+          ]
+        },
+        "c15": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The tenant company number is unfilled in LR3; it is not a registration number.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in\n[England and Wales] [the United Kingdom]\n[COUNTRY] under company registration number\n[COMPANY NUMBER])"
+            }
+          ]
+        },
+        "c16": {
+          "value": "[GUARANTOR] — optional",
+          "status": "optional",
+          "explanation": "Both the guarantor identity and inclusion of a guarantor remain unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 4,
+              "quote": "[Guarantor [GUARANTOR]"
+            }
+          ]
+        },
+        "c17": {
+          "value": "Commercial lease template",
+          "status": "extracted",
+          "explanation": "The source is a lease-form template, not an agreement for lease, licence, or executed occupational lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "LEASE"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c18": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Contracting-out wording is optional and notice/declaration dates are unfilled. The template does not establish an actual In/Out status.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 31,
+              "quote": "[Contracting-out"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 31,
+              "quote": "28 (inclusive) of the 1954 Act do not apply to the tenancy created by this Lease."
+            }
+          ]
+        },
+        "c19": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term start date is unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c20": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The break right is optional and its date(s) remain placeholders.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 7,
+              "quote": "[“Break Date”"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 7,
+              "quote": "[DATE OR DATES]"
+            }
+          ]
+        },
+        "c21": {
+          "value": "Tenant — if optional clause retained",
+          "status": "optional",
+          "explanation": "Clause 8 gives the tenant the optional break. This does not assert an effective break right in a completed lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 34,
+              "quote": "The Tenant may end the Term on [any][the] Break Date by giving the Landlord formal notice"
+            }
+          ]
+        },
+        "c22": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The optional break notice period is [LENGTH] months; no numeric period has been selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 34,
+              "quote": "of not less than [LENGTH] months’"
+            }
+          ]
+        },
+        "c23": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional break payment is described as a figure/proportion of Main Rent, but neither inclusion nor amount is agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 35,
+              "quote": "[insert figure/proportion of the Main Rent]"
+            }
+          ]
+        },
+        "c24": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term end date is unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c25": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Review is optional and both the day/month and review years are unfilled; no next review date can be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 13,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c26": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover leaves [5 yearly] and [None] unselected. Five-year wording in the hypothetical valuation lease does not establish the actual review schedule.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "Rent review pattern [5 yearly][None]"
+            }
+          ]
+        },
+        "c27": {
+          "value": "Open market — optional template mechanism",
+          "status": "optional",
+          "explanation": "Schedule 2 provides open-market review mechanics, while the cover retains alternative review types and inclusion remains unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 40,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c28": {
+          "value": "Yes — if Schedule 2 retained",
+          "status": "optional",
+          "explanation": "The supplied market-review mechanism selects the higher of passing Main Rent and Market Rent. It is not confirmation of an agreed live review.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 40,
+              "quote": "On the Rent Review Date, the Main Rent is to be reviewed to the higher of:"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 40,
+              "quote": "the Main Rent reserved immediately before the Rent Review Date; and"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 40,
+              "quote": "the Market Rent."
+            }
+          ]
+        },
+        "c29": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No indexed-review maximum uplift is set in this lease. A separate optional index-review document is not treated as incorporated.",
+          "evidence": []
+        },
+        "c30": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numeric indexed-review collar is set. Upward-only market review is described separately and is not an indexed percentage collar.",
+          "evidence": []
+        },
+        "c31": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover offers no rent-free period or an unfilled duration. The term start is unfilled, so no incentive start date is established.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c32": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Main Rent is not payable before the Rent Commencement Date, but that date is unfilled; a rent-free end date cannot be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 13,
+              "quote": "[DATE OR DESCRIPTION] or any later date calculated"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 16,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            }
+          ]
+        },
+        "c33": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The template waives Main Rent before commencement, but whether there is a rent-free period is unresolved. No actual incentive percentage is populated; ancillary rent has separate treatment.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 16,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            }
+          ]
+        },
+        "c34": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No landlord cash incentive or fit-out capital-contribution amount is specified. No agreement for lease or side letter is linked to this source.",
+          "evidence": []
+        },
+        "c35": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Annual Main Rent contains only amount placeholders. There is no current contracted rent for an occupied asset.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 11,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c36": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate contracted rent per square foot because annual rent and measured area are missing.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 11,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c37": {
+          "value": "Monthly / quarterly — unselected",
+          "status": "optional",
+          "explanation": "Both payment-frequency alternatives remain in clause 3.6; neither is treated as agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 17,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c38": {
+          "value": "Advance",
+          "status": "extracted",
+          "explanation": "Clause 3.6 expressly states payment in advance. This describes the template wording rather than an executed tenancy.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 17,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c39": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Stepped rent is merely an unselected cover alternative; no step date or actual stepped-rent schedule is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c40": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No populated stepped annual-rent amount is supplied.",
+          "evidence": []
+        },
+        "c41": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate stepped rent per square foot: both stepped rent and actual floor area are absent.",
+          "evidence": []
+        },
+        "c42": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No turnover-rent percentage is incorporated. A drafting note refers to a separate optional clause; that reference does not incorporate it.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 16,
+              "quote": "For Turnover Rent provisions, refer to the Model Commercial Lease: Turnover Rent clause"
+            }
+          ]
+        },
+        "c43": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No valuation or estimated market-rent amount is supplied. The Market Rent definition is a review mechanism, not a valuation.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 40,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket"
+            }
+          ]
+        },
+        "c44": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate estimated rental value per square foot because a valuation and measured floor area are missing.",
+          "evidence": []
+        },
+        "c45": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No annual service-charge budget or billed amount for this tenant is supplied. References to services in a future underlease do not establish a charge under this main lease.",
+          "evidence": []
+        },
+        "c46": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate service charge per square foot: no annual charge or actual floor area is supplied.",
+          "evidence": []
+        },
+        "c47": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge cap for this main lease is stated; standalone optional clauses are not linked as amendments.",
+          "evidence": []
+        },
+        "c48": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge minimum/collar for this main lease is specified.",
+          "evidence": []
+        },
+        "c49": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The insurance-cost recovery obligation is present, but no premium, demand or actual annual Insurance Rent amount is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 42,
+              "quote": "The Tenant must pay on demand:"
+            }
+          ]
+        },
+        "c50": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The assignment clause may require a future assignee deposit based on [six] months’ rent. It does not show an existing cash deposit or a deposit deed for this tenant.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 23,
+              "quote": "the assignee enters into a rent deposit deed with the Landlord"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 23,
+              "quote": "providing for a deposit of not less than [six] months’ Main Rent"
+            }
+          ]
+        },
+        "c51": {
+          "value": "Whole-demise repair + insurance contribution",
+          "status": "needs_review",
+          "explanation": "The whole-building demise includes structure/roof, the tenant has a substantial-repair covenant, and insurance costs are reimbursed. Insured/uninsured-risk exceptions and an optional condition limitation qualify the obligations. An unqualified FRI/IRI classification needs review rather than assuming an executed FRI lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 12,
+              "quote": "all buildings from time to time on the Premises and the load-bearing walls, structure,"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 18,
+              "quote": "keep the Premises clean and tidy and in good and substantial repair and\ncondition;"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 42,
+              "quote": "2.1.1 the whole of:"
+            }
+          ]
+        },
+        "c52": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional schedule-of-condition limitation is included, but no completed condition schedule or final selection establishes that it applies.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 19,
+              "quote": "condition attached to this Lease in any better state of repair and condition than"
+            }
+          ]
+        },
+        "c53": {
+          "value": "Yes — subject to agreement",
+          "status": "extracted",
+          "explanation": "The template requires removal of permitted works unless landlord and tenant agree otherwise, plus making good. Actual alterations and any agreed exceptions are unknown.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 20,
+              "quote": "unless and to the extent that the Landlord and the Tenant otherwise agree,"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 20,
+              "quote": "all Permitted Works; and"
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 20,
+              "quote": "restore them to the same configuration, state and condition"
+            }
+          ]
+        },
+        "c54": {
+          "value": "Assign with consent; underletting optional",
+          "status": "optional",
+          "explanation": "Assignment of the whole requires landlord consent and may require an AGA, guarantor or assignee deposit. Underletting is optional under the stated schedule, with consent and approved-underlease conditions. No actual assignment or underlease is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 23,
+              "quote": "The Tenant may, with the Landlord’s consent, assign the whole of the Premises."
+            },
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 52,
+              "quote": "Tenant may, with the Landlord’s consent, underlet the\nwhole of the Premises"
+            }
+          ]
+        },
+        "c55": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No side letter or executed variation is linked to this template. Generic references to supplemental documents are not evidence that one exists.",
+          "evidence": []
+        },
+        "c56": {
+          "value": "Unused template — not an occupied asset or live rent roll",
+          "status": "extracted",
+          "explanation": "One row represents this source document. Party names, addresses, amounts and dates are unfilled, and optional terms remain unresolved. The extraction preserves template mechanics and does not invent portfolio data.",
+          "evidence": [
+            {
+              "documentId": "mcl-logistic-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mcl-food-drink-01",
+      "documentId": "mcl-food-drink-01",
+      "title": "MCL Food Drink 01 — Whole food-and-drink lease",
+      "category": "food-and-drink",
+      "cells": {
+        "c01": {
+          "value": 7,
+          "status": "derived",
+          "explanation": "Assigned display row for this source template; it is not a property or lease identifier.",
+          "evidence": []
+        },
+        "c02": {
+          "value": "Food & Drink",
+          "status": "extracted",
+          "explanation": "Asset category is explicitly identified on the template cover.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "WHOLE (FOOD AND DRINK)"
+            }
+          ]
+        },
+        "c03": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "The premises definition contains an unfilled address rather than an actual unit name.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 11,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            }
+          ]
+        },
+        "c04": {
+          "value": "[ADDRESS OF PREMISES]",
+          "status": "placeholder",
+          "explanation": "This is a whole-premises template, but the building address/name remains unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 11,
+              "quote": "the premises known as [ADDRESS OF PREMISES]"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "WHOLE (FOOD AND DRINK)"
+            }
+          ]
+        },
+        "c05": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No separate suite or unit number is identified in this whole-premises template.",
+          "evidence": []
+        },
+        "c06": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No actual floor or floor range for the demise is specified; generic references to floors do not identify a floor.",
+          "evidence": []
+        },
+        "c07": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measured floor area for the actual demise is supplied. No area is inferred from a generic clause or illustrative number.",
+          "evidence": []
+        },
+        "c08": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No measurement basis for an actual measured demise is supplied.",
+          "evidence": []
+        },
+        "c09": {
+          "value": "Food / drink use; restaurant, sandwich shop, bar and takeaway alternatives unselected",
+          "status": "optional",
+          "explanation": "The Permitted Use definition contains unselected drafting alternatives. This is a summary of the available wording, not a confirmed use for an occupied unit. Schedule 8 also contains alternative user restrictions; its drafting note says only one of paragraphs 1.1, 1.2 or 1.3 should be included.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 11,
+              "quote": "the use of the Premises as a [[sandwich shop within Class E(a)][restaurant within Class E(b)]"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 54,
+              "quote": "Only one of paragraphs 1.1, 1.2 or 1.3 should be included."
+            }
+          ]
+        },
+        "c10": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "An optional duty to mark parking areas does not establish any actual parking-space count.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 19,
+              "quote": "The Tenant must keep all car parking areas within the Premises suitably marked"
+            }
+          ]
+        },
+        "c11": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The lease refers to EPC obligations but supplies no EPC certificate or actual A–G rating.",
+          "evidence": []
+        },
+        "c12": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No EPC issue or expiry date appears; no certificate has been supplied for this template.",
+          "evidence": []
+        },
+        "c13": {
+          "value": null,
+          "status": "not_applicable",
+          "explanation": "This is an unused lease template, not evidence of an occupied or vacant unit. Occupancy cannot be marked Y or N.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c14": {
+          "value": "[TENANT]",
+          "status": "placeholder",
+          "explanation": "LR3 leaves the tenant legal entity blank. No current tenant is identified.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in"
+            }
+          ]
+        },
+        "c15": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The tenant company number is unfilled in LR3; it is not a registration number.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 4,
+              "quote": "Tenant [TENANT] (incorporated and registered in\n[England and Wales] [the United Kingdom]\n[COUNTRY] under company registration number\n[COMPANY NUMBER])"
+            }
+          ]
+        },
+        "c16": {
+          "value": "[GUARANTOR] — optional",
+          "status": "optional",
+          "explanation": "Both the guarantor identity and inclusion of a guarantor remain unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 4,
+              "quote": "[Guarantor [GUARANTOR]"
+            }
+          ]
+        },
+        "c17": {
+          "value": "Commercial lease template",
+          "status": "extracted",
+          "explanation": "The source is a lease-form template, not an agreement for lease, licence, or executed occupational lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "LEASE"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        },
+        "c18": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Contracting-out wording is optional and notice/declaration dates are unfilled. The template does not establish an actual In/Out status.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 32,
+              "quote": "[Contracting-out"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 32,
+              "quote": "28 (inclusive) of the 1954 Act do not apply to the tenancy created by this Lease."
+            }
+          ]
+        },
+        "c19": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term start date is unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c20": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The break right is optional and its date(s) remain placeholders.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 7,
+              "quote": "[“Break Date”"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 7,
+              "quote": "[DATE OR DATES]"
+            }
+          ]
+        },
+        "c21": {
+          "value": "Tenant — if optional clause retained",
+          "status": "optional",
+          "explanation": "Clause 8 gives the tenant the optional break. This does not assert an effective break right in a completed lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 35,
+              "quote": "The Tenant may end the Term on [any][the] Break Date by giving the Landlord formal notice"
+            }
+          ]
+        },
+        "c22": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The optional break notice period is [LENGTH] months; no numeric period has been selected.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 35,
+              "quote": "of not less than [LENGTH] months’"
+            }
+          ]
+        },
+        "c23": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional break payment is described as a figure/proportion of Main Rent, but neither inclusion nor amount is agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 36,
+              "quote": "[insert figure/proportion of the Main Rent]"
+            }
+          ]
+        },
+        "c24": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "The Contractual Term end date is unfilled.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c25": {
+          "value": null,
+          "status": "optional",
+          "explanation": "Review is optional and both the day/month and review years are unfilled; no next review date can be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 12,
+              "quote": "[DATE] in each of the years [YEARS]"
+            }
+          ]
+        },
+        "c26": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover leaves [5 yearly] and [None] unselected. Five-year wording in the hypothetical valuation lease does not establish the actual review schedule.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "Rent review pattern [5 yearly][None]"
+            }
+          ]
+        },
+        "c27": {
+          "value": "Open market — optional template mechanism",
+          "status": "optional",
+          "explanation": "Schedule 2 provides open-market review mechanics, while the cover retains alternative review types and inclusion remains unresolved.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 41,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "Rent review basis [Open Market][Index-linked\n([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c28": {
+          "value": "Yes — if Schedule 2 retained",
+          "status": "optional",
+          "explanation": "The supplied market-review mechanism selects the higher of passing Main Rent and Market Rent. It is not confirmation of an agreed live review.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 41,
+              "quote": "On the Rent Review Date, the Main Rent is to be reviewed to the higher of:"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 41,
+              "quote": "the Main Rent reserved immediately before the Rent Review Date; and"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 41,
+              "quote": "the Market Rent."
+            }
+          ]
+        },
+        "c29": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No indexed-review maximum uplift is set in this lease. A separate optional index-review document is not treated as incorporated.",
+          "evidence": []
+        },
+        "c30": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No numeric indexed-review collar is set. Upward-only market review is described separately and is not an indexed percentage collar.",
+          "evidence": []
+        },
+        "c31": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The cover offers no rent-free period or an unfilled duration. The term start is unfilled, so no incentive start date is established.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 8,
+              "quote": "the term of [●] years starting on [●] and ending on [●];"
+            }
+          ]
+        },
+        "c32": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Main Rent is not payable before the Rent Commencement Date, but that date is unfilled; a rent-free end date cannot be calculated.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 12,
+              "quote": "[DATE OR DESCRIPTION] or any later date calculated"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 16,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            }
+          ]
+        },
+        "c33": {
+          "value": null,
+          "status": "optional",
+          "explanation": "The template waives Main Rent before commencement, but whether there is a rent-free period is unresolved. No actual incentive percentage is populated; ancillary rent has separate treatment.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "Rent-free Period [None][[●] months]"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 16,
+              "quote": "The Main Rent is not payable for any period before the Rent Commencement Date"
+            }
+          ]
+        },
+        "c34": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No landlord cash incentive or fit-out capital-contribution amount is specified. No agreement for lease or side letter is linked to this source.",
+          "evidence": []
+        },
+        "c35": {
+          "value": null,
+          "status": "placeholder",
+          "explanation": "Annual Main Rent contains only amount placeholders. There is no current contracted rent for an occupied asset.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 10,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c36": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate contracted rent per square foot because annual rent and measured area are missing.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 10,
+              "quote": "the yearly rent of [AMOUNT IN WORDS] pounds (£[AMOUNT IN FIGURES])"
+            }
+          ]
+        },
+        "c37": {
+          "value": "Monthly / quarterly — unselected",
+          "status": "optional",
+          "explanation": "Both payment-frequency alternatives remain in clause 3.6; neither is treated as agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 17,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c38": {
+          "value": "Advance",
+          "status": "extracted",
+          "explanation": "Clause 3.6 expressly states payment in advance. This describes the template wording rather than an executed tenancy.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 17,
+              "quote": "The Main Rent is payable by equal [monthly/quarterly] payments in advance on the Rent Days"
+            }
+          ]
+        },
+        "c39": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Stepped rent is merely an unselected cover alternative; no step date or actual stepped-rent schedule is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "([RPI][CPI])][Stepped]"
+            }
+          ]
+        },
+        "c40": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No populated stepped annual-rent amount is supplied.",
+          "evidence": []
+        },
+        "c41": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate stepped rent per square foot: both stepped rent and actual floor area are absent.",
+          "evidence": []
+        },
+        "c42": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No turnover-rent percentage is incorporated. A drafting note refers to a separate optional clause; that reference does not incorporate it.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 16,
+              "quote": "For Turnover Rent provisions, refer to the Model Commercial Lease: Turnover Rent clause"
+            }
+          ]
+        },
+        "c43": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No valuation or estimated market-rent amount is supplied. The Market Rent definition is a review mechanism, not a valuation.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 41,
+              "quote": "the yearly rent at which the Premises might reasonably be expected to be let on the open\nmarket"
+            }
+          ]
+        },
+        "c44": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate estimated rental value per square foot because a valuation and measured floor area are missing.",
+          "evidence": []
+        },
+        "c45": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No annual service-charge budget or billed amount for this tenant is supplied. References to services in a future underlease do not establish a charge under this main lease.",
+          "evidence": []
+        },
+        "c46": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "Cannot calculate service charge per square foot: no annual charge or actual floor area is supplied.",
+          "evidence": []
+        },
+        "c47": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge cap for this main lease is stated; standalone optional clauses are not linked as amendments.",
+          "evidence": []
+        },
+        "c48": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No service-charge minimum/collar for this main lease is specified.",
+          "evidence": []
+        },
+        "c49": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The insurance-cost recovery obligation is present, but no premium, demand or actual annual Insurance Rent amount is supplied.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 43,
+              "quote": "The Tenant must pay on demand:"
+            }
+          ]
+        },
+        "c50": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "The assignment clause may require a future assignee deposit based on [six] months’ rent. It does not show an existing cash deposit or a deposit deed for this tenant.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 23,
+              "quote": "the assignee enters into a rent deposit deed with the Landlord"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 23,
+              "quote": "providing for a deposit of not less than [six] months’ Main Rent"
+            }
+          ]
+        },
+        "c51": {
+          "value": "Whole-demise repair + insurance contribution",
+          "status": "needs_review",
+          "explanation": "The whole-building demise includes structure/roof, the tenant has a substantial-repair covenant, and insurance costs are reimbursed. Insured/uninsured-risk exceptions and an optional condition limitation qualify the obligations. An unqualified FRI/IRI classification needs review rather than assuming an executed FRI lease.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 12,
+              "quote": "all buildings from time to time on the Premises and the load-bearing walls, structure,"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 18,
+              "quote": "keep the Premises clean and tidy and in good and substantial repair and\ncondition;"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 43,
+              "quote": "2.1.1 the whole of:"
+            }
+          ]
+        },
+        "c52": {
+          "value": null,
+          "status": "optional",
+          "explanation": "An optional schedule-of-condition limitation is included, but no completed condition schedule or final selection establishes that it applies.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 19,
+              "quote": "condition attached to this Lease in any better state of repair and condition than"
+            }
+          ]
+        },
+        "c53": {
+          "value": "Yes — subject to agreement",
+          "status": "extracted",
+          "explanation": "The template requires removal of permitted works unless landlord and tenant agree otherwise, plus making good. Actual alterations and any agreed exceptions are unknown.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 21,
+              "quote": "unless and to the extent that the Landlord and the Tenant otherwise agree,"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 21,
+              "quote": "all Permitted Works; and"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 21,
+              "quote": "restore them to the same configuration, state and condition"
+            }
+          ]
+        },
+        "c54": {
+          "value": "Assign with consent; optional underletting and initial bar",
+          "status": "optional",
+          "explanation": "Assignment of the whole requires landlord consent and may require an AGA, guarantor or assignee deposit. Underletting is optional under the stated schedule, with consent and approved-underlease conditions. No actual assignment or underlease is supplied. The template also offers an optional ban on whole assignment (and optionally underletting whole or part) during the first three years; this has not been selected or agreed.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 23,
+              "quote": "The Tenant may, with the Landlord’s consent, assign the whole of the Premises."
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 53,
+              "quote": "Tenant may, with the Landlord’s consent, underlet the\nwhole of the Premises"
+            },
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 23,
+              "quote": "[The Tenant must not assign the whole of the Premises [or underlet the Premises in\nwhole or in part] during the first three years of the Term.]"
+            }
+          ]
+        },
+        "c55": {
+          "value": null,
+          "status": "not_found",
+          "explanation": "No side letter or executed variation is linked to this template. Generic references to supplemental documents are not evidence that one exists.",
+          "evidence": []
+        },
+        "c56": {
+          "value": "Unused template — not an occupied asset or live rent roll",
+          "status": "extracted",
+          "explanation": "One row represents this source document. Party names, addresses, amounts and dates are unfilled, and optional terms remain unresolved. The extraction preserves template mechanics and does not invent portfolio data.",
+          "evidence": [
+            {
+              "documentId": "mcl-food-drink-01",
+              "page": 1,
+              "quote": "THIS LEASE IS INTENDED TO BE USED AS A TEMPLATE."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

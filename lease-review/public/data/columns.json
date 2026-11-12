@@ -1,0 +1,510 @@
+{
+  "sourceUrl": "https://docs.google.com/spreadsheets/d/1AoBtuEZbLG8eBeb8gNvPBMsIKTXU9BJx/edit",
+  "title": "Draft_Rent_Roll_Columns_v3.xlsx",
+  "columns": [
+    {
+      "id": "c01",
+      "index": 1,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "#",
+      "description": "Row number for each unit / lease line",
+      "sourceHint": "Assigned, not extracted"
+    },
+    {
+      "id": "c02",
+      "index": 2,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Category",
+      "description": "Asset or unit type (office, retail, industrial etc.)",
+      "sourceHint": "Lease (permitted use, premises description), sales brochure"
+    },
+    {
+      "id": "c03",
+      "index": 3,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Unit Name",
+      "description": "Name of the demise as described in the lease",
+      "sourceHint": "Lease (premises definition), Land Registry title"
+    },
+    {
+      "id": "c04",
+      "index": 4,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Building",
+      "description": "Building or estate the unit sits in",
+      "sourceHint": "Lease, title plan"
+    },
+    {
+      "id": "c05",
+      "index": 5,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Unit Suite",
+      "description": "Suite or unit number within the building",
+      "sourceHint": "Lease, lease plan"
+    },
+    {
+      "id": "c06",
+      "index": 6,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Floor",
+      "description": "Floor(s) the demise occupies",
+      "sourceHint": "Lease, lease plan"
+    },
+    {
+      "id": "c07",
+      "index": 7,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Unit Area Sqft",
+      "description": "Floor area of the demise",
+      "sourceHint": "Measured survey; sometimes the lease or rent review clause"
+    },
+    {
+      "id": "c08",
+      "index": 8,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Area Basis",
+      "description": "Measurement standard used (NIA, GIA, IPMS)",
+      "sourceHint": "Measured survey, lease"
+    },
+    {
+      "id": "c09",
+      "index": 9,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Permitted Use",
+      "description": "Use the tenant is allowed to make of the premises, including use class",
+      "sourceHint": "Lease (user clause)"
+    },
+    {
+      "id": "c10",
+      "index": 10,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "Car Spaces",
+      "description": "Number of parking spaces demised or licensed",
+      "sourceHint": "Lease (rights granted), car parking licence"
+    },
+    {
+      "id": "c11",
+      "index": 11,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "EPC",
+      "description": "Energy rating, A to G",
+      "sourceHint": "EPC certificate"
+    },
+    {
+      "id": "c12",
+      "index": 12,
+      "section": "Unit Information",
+      "group": "Unit Information",
+      "label": "EPC Expiry",
+      "description": "Date the certificate lapses (10 years from issue)",
+      "sourceHint": "EPC certificate"
+    },
+    {
+      "id": "c13",
+      "index": 13,
+      "section": "Tenancy",
+      "group": "Occupied",
+      "label": "Y/N",
+      "description": "Whether the unit is let or vacant",
+      "sourceHint": "Existence of a current lease; tenancy schedule"
+    },
+    {
+      "id": "c14",
+      "index": 14,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Tenant Name",
+      "description": "Legal entity that is the current tenant",
+      "sourceHint": "Lease, or latest licence to assign / deed of assignment"
+    },
+    {
+      "id": "c15",
+      "index": 15,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Tenant Co. No.",
+      "description": "Tenant's company registration number",
+      "sourceHint": "Lease (parties clause)"
+    },
+    {
+      "id": "c16",
+      "index": 16,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Guarantor",
+      "description": "Any party guaranteeing the tenant's obligations",
+      "sourceHint": "Lease, deed of guarantee, authorised guarantee agreement"
+    },
+    {
+      "id": "c17",
+      "index": 17,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Lease Type",
+      "description": "Form of occupation (lease, underlease, licence, tenancy at will, agreement for lease)",
+      "sourceHint": "The occupational document itself"
+    },
+    {
+      "id": "c18",
+      "index": 18,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "1954 Act In / Out",
+      "description": "Whether the tenant has security of tenure under the Landlord and Tenant Act 1954",
+      "sourceHint": "Lease (exclusion clause), landlord's warning notice and tenant's declaration"
+    },
+    {
+      "id": "c19",
+      "index": 19,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Lease Start",
+      "description": "Term commencement date",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c20",
+      "index": 20,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Break Date",
+      "description": "Date on which the lease can be ended early",
+      "sourceHint": "Lease (break clause), deed of variation"
+    },
+    {
+      "id": "c21",
+      "index": 21,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Break Party",
+      "description": "Who holds the break: landlord, tenant or mutual",
+      "sourceHint": "Lease (break clause)"
+    },
+    {
+      "id": "c22",
+      "index": 22,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Break Notice Mths",
+      "description": "Minimum written notice needed to exercise the break",
+      "sourceHint": "Lease (break clause)"
+    },
+    {
+      "id": "c23",
+      "index": 23,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Break Penalty \u00a3",
+      "description": "Payment due from the tenant if it exercises the break",
+      "sourceHint": "Lease (break clause), side letter"
+    },
+    {
+      "id": "c24",
+      "index": 24,
+      "section": "Tenancy",
+      "group": "Term",
+      "label": "Expiry Date",
+      "description": "Contractual end of the term",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c25",
+      "index": 25,
+      "section": "Tenancy",
+      "group": "Rent Review",
+      "label": "Rent Review Date",
+      "description": "Next review date",
+      "sourceHint": "Lease (rent review provisions)"
+    },
+    {
+      "id": "c26",
+      "index": 26,
+      "section": "Tenancy",
+      "group": "Rent Review",
+      "label": "Rent Review Frequency",
+      "description": "Review pattern, e.g. every 5 years or annual",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c27",
+      "index": 27,
+      "section": "Tenancy",
+      "group": "Rent Review",
+      "label": "Rent Review Basis",
+      "description": "How the reviewed rent is set: open market, RPI, CPI, fixed uplift",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c28",
+      "index": 28,
+      "section": "Tenancy",
+      "group": "Rent Review",
+      "label": "Upward Only Y/N",
+      "description": "Whether the rent can fall on review",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c29",
+      "index": 29,
+      "section": "Tenancy",
+      "group": "Rent Review",
+      "label": "Rent Review Cap",
+      "description": "Maximum uplift on an indexed review",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c30",
+      "index": 30,
+      "section": "Tenancy",
+      "group": "Rent Review",
+      "label": "Rent Review Collar",
+      "description": "Minimum uplift on an indexed review",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c31",
+      "index": 31,
+      "section": "Tenancy",
+      "group": "Rent Free",
+      "label": "Rent Free Start Date",
+      "description": "First day of the rent free period",
+      "sourceHint": "Lease, agreement for lease, side letter"
+    },
+    {
+      "id": "c32",
+      "index": 32,
+      "section": "Tenancy",
+      "group": "Rent Free",
+      "label": "Rent Free End Date",
+      "description": "Last day of the rent free period (rent commencement date follows)",
+      "sourceHint": "Lease, agreement for lease, side letter"
+    },
+    {
+      "id": "c33",
+      "index": 33,
+      "section": "Tenancy",
+      "group": "Rent Free",
+      "label": "Rent Free % Rent",
+      "description": "Share of rent waived in that period (100% for full rent free, 50% for half rent)",
+      "sourceHint": "Lease, side letter"
+    },
+    {
+      "id": "c34",
+      "index": 34,
+      "section": "Tenancy",
+      "group": "Capital Contribution",
+      "label": "\u00a3",
+      "description": "Cash paid by the landlord to the tenant as an incentive, usually towards fit-out",
+      "sourceHint": "Agreement for lease, side letter"
+    },
+    {
+      "id": "c35",
+      "index": 35,
+      "section": "Tenancy",
+      "group": "Contracted Rent",
+      "label": "\u00a3",
+      "description": "Annual rent currently reserved under the lease",
+      "sourceHint": "Lease, rent review memorandum, deed of variation"
+    },
+    {
+      "id": "c36",
+      "index": 36,
+      "section": "Tenancy",
+      "group": "Contracted Rent",
+      "label": "\u00a3psf",
+      "description": "Contracted rent divided by area",
+      "sourceHint": "Calculated"
+    },
+    {
+      "id": "c37",
+      "index": 37,
+      "section": "Tenancy",
+      "group": "Contracted Rent",
+      "label": "Frequency",
+      "description": "How often rent is paid (quarterly, monthly)",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c38",
+      "index": 38,
+      "section": "Tenancy",
+      "group": "Contracted Rent",
+      "label": "Advance / Arrears",
+      "description": "Whether rent is paid at the start or end of each period",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c39",
+      "index": 39,
+      "section": "Tenancy",
+      "group": "Stepped Rent",
+      "label": "Step Date",
+      "description": "Date a pre-agreed rent change takes effect",
+      "sourceHint": "Lease (rent definition or schedule)"
+    },
+    {
+      "id": "c40",
+      "index": 40,
+      "section": "Tenancy",
+      "group": "Stepped Rent",
+      "label": "\u00a3",
+      "description": "Annual rent from the step date",
+      "sourceHint": "Lease"
+    },
+    {
+      "id": "c41",
+      "index": 41,
+      "section": "Tenancy",
+      "group": "Stepped Rent",
+      "label": "\u00a3psf",
+      "description": "Stepped rent divided by area",
+      "sourceHint": "Calculated"
+    },
+    {
+      "id": "c42",
+      "index": 42,
+      "section": "Tenancy",
+      "group": "Turnover Rent",
+      "label": "% Turnover",
+      "description": "Share of tenant's turnover payable as rent, on top of or instead of base rent",
+      "sourceHint": "Lease (turnover rent schedule)"
+    },
+    {
+      "id": "c43",
+      "index": 43,
+      "section": "Tenancy",
+      "group": "ERV",
+      "label": "\u00a3",
+      "description": "Estimated market rent for the unit",
+      "sourceHint": "Valuation report, agent's letting advice (not in the lease)"
+    },
+    {
+      "id": "c44",
+      "index": 44,
+      "section": "Tenancy",
+      "group": "ERV",
+      "label": "\u00a3psf",
+      "description": "ERV divided by area",
+      "sourceHint": "Valuation report, or calculated"
+    },
+    {
+      "id": "c45",
+      "index": 45,
+      "section": "Tenancy",
+      "group": "Service Charge",
+      "label": "\u00a3",
+      "description": "Annual service charge payable by the tenant",
+      "sourceHint": "Service charge budget and apportionment schedule; lease for the mechanism"
+    },
+    {
+      "id": "c46",
+      "index": 46,
+      "section": "Tenancy",
+      "group": "Service Charge",
+      "label": "\u00a3psf",
+      "description": "Service charge divided by area",
+      "sourceHint": "Calculated"
+    },
+    {
+      "id": "c47",
+      "index": 47,
+      "section": "Tenancy",
+      "group": "Service Charge",
+      "label": "Cap",
+      "description": "Limit on what the tenant can be charged",
+      "sourceHint": "Lease, side letter"
+    },
+    {
+      "id": "c48",
+      "index": 48,
+      "section": "Tenancy",
+      "group": "Service Charge",
+      "label": "Collar",
+      "description": "Minimum the tenant pays",
+      "sourceHint": "Lease, side letter"
+    },
+    {
+      "id": "c49",
+      "index": 49,
+      "section": "Tenancy",
+      "group": "Insurance Rent",
+      "label": "\u00a3",
+      "description": "Tenant's contribution to the landlord's buildings insurance premium",
+      "sourceHint": "Insurance schedule or demand; lease for the obligation"
+    },
+    {
+      "id": "c50",
+      "index": 50,
+      "section": "Tenancy",
+      "group": "Rent Deposit",
+      "label": "\u00a3",
+      "description": "Cash security held against tenant default",
+      "sourceHint": "Rent deposit deed"
+    },
+    {
+      "id": "c51",
+      "index": 51,
+      "section": "Tenancy",
+      "group": "Repair",
+      "label": "FRI / IRI",
+      "description": "Extent of the tenant's repairing liability (full, internal only, or via service charge)",
+      "sourceHint": "Lease (repair covenant)"
+    },
+    {
+      "id": "c52",
+      "index": 52,
+      "section": "Tenancy",
+      "group": "Schedule of Condition",
+      "label": "Y / N",
+      "description": "Whether repair liability is limited to the condition recorded at lease start",
+      "sourceHint": "Lease, annexed schedule of condition"
+    },
+    {
+      "id": "c53",
+      "index": 53,
+      "section": "Tenancy",
+      "group": "Reinstatement",
+      "label": "Y / N",
+      "description": "Whether the tenant must remove alterations and reinstate at lease end",
+      "sourceHint": "Lease (yielding up clause), licence for alterations"
+    },
+    {
+      "id": "c54",
+      "index": 54,
+      "section": "Tenancy",
+      "group": "Alienation",
+      "label": "Assign / Underlet",
+      "description": "Whether the tenant can assign or underlet, and on what terms",
+      "sourceHint": "Lease (alienation clause)"
+    },
+    {
+      "id": "c55",
+      "index": 55,
+      "section": "Tenancy",
+      "group": "Side Letter / Variation",
+      "label": "Y / N",
+      "description": "Whether documents outside the lease change its terms",
+      "sourceHint": "Side letters, deeds of variation"
+    },
+    {
+      "id": "c56",
+      "index": 56,
+      "section": "Tenancy",
+      "group": "Unit Information",
+      "label": "Comment",
+      "description": "Free text for anything that does not fit a column, e.g. second break dates or personal concessions",
+      "sourceHint": "Any of the above"
+    }
+  ]
+}

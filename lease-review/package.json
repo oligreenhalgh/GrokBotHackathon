@@ -1,0 +1,17 @@
+{
+  "name": "folio-lease-review",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local lease register with verifiable PDF source evidence",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check server.mjs && node --check export.mjs && node --check public/app.js && node --check public/pdf-viewer.js && node --check public/viewer.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "exceljs": "4.4.0"
+  }
+}
