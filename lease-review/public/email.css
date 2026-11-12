@@ -1,0 +1,37 @@
+.email-connect { width: min(620px, 100%); margin: 36px auto; border: 1px solid var(--line); padding: 32px; }
+.email-connect-icon { color: var(--accent); margin-bottom: 18px; }
+.email-connect-icon svg { width: 27px; height: 27px; }
+.email-connect h2 { margin-bottom: 13px; }
+.email-connect p { line-height: 1.7; color: var(--muted); font-size: 12px; margin-bottom: 18px; }
+.email-connect .email-access { font-size: 11px; max-width: 460px; }
+.gmail-setup { border-top: 1px solid var(--line); padding-top: 22px; margin-top: 23px; }
+.gmail-setup h3 { font-size: 12px; }
+.gmail-setup ol { padding-left: 18px; margin: 14px 0 23px; font-size: 12px; line-height: 1.75; color: #6b5c61; }
+.gmail-setup li { margin-bottom: 10px; padding-left: 3px; }
+.gmail-setup a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.gmail-setup .button { cursor: pointer; }
+.gmail-setup .email-setup-note { font-size: 10px; margin: 12px 0 0; }
+.email-connect .email-connecting { font-size: 11px; margin: 16px 0 0; }
+.email-connect-fallback { margin-top: 16px; display: flex; gap: 12px; align-items: center; color: var(--muted); font-size: 10px; line-height: 1.6; }
+.email-alert,.email-notice { flex-shrink: 0; padding: 12px 14px; margin-bottom: 18px; font-size: 12px; line-height: 1.6; border-left: 2px solid var(--accent); background: var(--accent-soft); }
+.email-alert { color: #92213b; }
+.email-notice { color: #644452; }
+.email-account { color: var(--muted); font-size: 11px; margin-right: 7px; }
+.email-toolbar { justify-content: space-between; }
+.email-toolbar .search { width: 300px; }
+.email-poll-status { color: var(--muted); font-size: 10px; }
+.email-list { border-top: 1px solid var(--line); }
+.email-message { padding: 22px 14px; border-bottom: 1px solid var(--line); }
+.email-message-heading { display: flex; justify-content: space-between; gap: 18px; margin-bottom: 15px; }
+.email-message-heading h2 { font-size: 13px; font-weight: 600; letter-spacing: 0; line-height: 1.5; }
+.email-message-heading p { color: var(--muted); font-size: 11px; line-height: 1.6; margin-top: 4px; overflow-wrap: anywhere; }
+.email-message-heading time { flex-shrink: 0; color: var(--muted); font-size: 10px; padding-top: 4px; }
+.email-attachment { display: flex; align-items: center; gap: 12px; padding: 9px 12px; background: var(--soft); margin-top: 6px; }
+.email-file { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+.email-file svg { color: #a97383; }
+.email-file strong { display: block; font-weight: 500; font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
+.email-file small { display: block; font-size: 10px; color: var(--muted); margin-top: 3px; }
+.email-added { color: #597249; font-size: 11px; }
+.email-more { display: flex; justify-content: center; padding-top: 18px; }
+.email-footnote { color: var(--muted); font-size: 10px; line-height: 1.6; padding: 18px 0; }
+@media (max-width: 600px) { .email-connect { padding: 22px; margin: 14px auto; } .email-account { max-width: 150px; overflow: hidden; text-overflow: ellipsis; } .email-message { padding-inline: 0; } .email-message-heading { flex-direction: column; gap: 4px; } .email-attachment { flex-wrap: wrap; } .email-file { min-width: 180px; } .email-poll-status { display: none; } }

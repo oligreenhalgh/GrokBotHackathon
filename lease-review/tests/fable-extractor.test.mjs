@@ -126,3 +126,9 @@ test('duplicate verified evidence is deduplicated without downgrading the suppor
   assert.equal(result.kind, 'lease'); assert.equal(result.rows[0].cells.c14.status, 'extracted');
   assert.equal(result.rows[0].cells.c14.evidence.length, 1);
 });
+
+test('a cancelled email import is checked immediately before a paid request', async () => {
+  let calls = 0;
+  await assert.rejects(extractWithFable({ document: source, columns, apiKey: 'test-only', beforeRequest: () => { throw new Error('Import cancelled'); }, fetchImpl: async () => { calls++; } }), /cancelled/);
+  assert.equal(calls, 0);
+});

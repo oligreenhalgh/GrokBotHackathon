@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { randomUUID, createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { extractWithFable, FABLE_MODEL, ExtractionError } from './fable-extractor.mjs';
+import { GmailClient, GmailError, openSystemBrowser } from './gmail-client.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.join(ROOT, 'public');
@@ -28,10 +29,13 @@ let index = await readJson(path.join(PUBLIC, 'data/document-index.json'), { docu
 let uploadMetadata = await readJson(path.join(STORAGE, 'uploads.json'), []);
 let state = await readJson(path.join(STORAGE, 'state.json'), { reviews: {}, overrides: {}, audit: [] });
 let imports = await readJson(path.join(STORAGE, 'imported-rows.json'), []);
+let emailProvenance = await readJson(path.join(STORAGE, 'email-provenance.json'), {});
+const gmail = await GmailClient.create({ storageDir: STORAGE, origin: `http://127.0.0.1:${PORT}` });
 let mutationQueue = Promise.resolve();
 const uploadCache = new Map();
 const uploadInFlight = new Map();
 const extractionJobs = new Map();
+const emailImportsInFlight = new Map();
 const COMPLETED_EXTRACTIONS = new Set(['extracted', 'supporting_extracted', 'extraction_imported', 'document_review_required', 'unrelated_document']);
 
 async function readJson(file, fallback) {
@@ -50,21 +54,21 @@ function mutate(fn) {
   return operation;
 }
 function fail(status, message) { const error = new Error(message); error.status = status; throw error; }
-function metadata(document) { const { pages, ...meta } = document; return meta; }
+function metadata(document) { const { pages, ...meta } = document; return { ...meta, ...(emailProvenance[document.id]?.length ? { emailSources: emailProvenance[document.id] } : {}) }; }
 function columnsFrom(data) { return Array.isArray(data) ? data : data.columns || []; }
 async function workspace() {
   const columns = columnsFrom(await readJson(path.join(PUBLIC, 'data/columns.json'), []));
   const extraction = await readJson(path.join(PUBLIC, 'data/extraction.json'), { rows: [] });
   const rows = [...(Array.isArray(extraction) ? extraction : extraction.rows || []), ...imports];
-  return { columns, rows, documents: [...index.documents.map(metadata), ...uploadMetadata], state, provider: providerInfo() };
+  return { columns, rows, documents: [...index.documents.map(metadata), ...uploadMetadata.map(metadata)], state, provider: providerInfo() };
 }
 async function documentById(id) {
   const prepared = index.documents.find(x => x.id === id);
-  if (prepared) return prepared;
+  if (prepared) return { ...prepared, ...metadata(prepared) };
   const meta = uploadMetadata.find(x => x.id === id);
   if (!meta) return null;
   if (!uploadCache.has(id)) uploadCache.set(id, await readJson(path.join(UPLOADS, id, 'document.json'), null));
-  return { ...uploadCache.get(id), ...meta };
+  return { ...uploadCache.get(id), ...metadata(meta) };
 }
 function json(res, status, data) {
   const content = Buffer.from(JSON.stringify(data));
@@ -92,9 +96,10 @@ function checkValue(value, label = 'Value') {
   if (typeof value === 'string' && value.length > 20000) fail(400, `${label} is too long.`);
 }
 function checkNote(note) { if (note !== undefined && (typeof note !== 'string' || note.length > 20000)) fail(400, 'Note must be a string of at most 20,000 characters.'); }
-function allowedRequest(req) {
+function allowedRequest(req, pathname) {
   const hosts = new Set([`127.0.0.1:${PORT}`, `localhost:${PORT}`]);
   if (!hosts.has(req.headers.host)) fail(403, 'This app accepts requests to its local address only.');
+  if (req.method === 'GET' && pathname === '/api/email/callback') return; // OAuth state + PKCE + browser cookie are checked by the callback.
   const origin = req.headers.origin;
   if (origin && ![`http://127.0.0.1:${PORT}`, `http://localhost:${PORT}`].includes(origin)) fail(403, 'Cross-origin requests are not allowed.');
   if (req.headers['sec-fetch-site'] === 'cross-site') fail(403, 'Cross-site requests are not allowed.');
@@ -189,18 +194,18 @@ async function completeExtraction(id, result) {
       elapsedMs: result.elapsedMs, usage: result.usage, inputMode: result.inputMode, requestId: result.requestId,
       rowIds: result.rows.map(row => row.id), validationIssues: result.validationIssues, error: null } }, 'extraction_completed');
 }
-async function runExtraction(id) {
+async function runExtraction(id, guard = () => {}) {
   const started = Date.now();
   try {
     const document = await documentById(id);
     const columns = columnsFrom(await readJson(path.join(PUBLIC, 'data/columns.json'), []));
-    const result = { ...await extractWithFable({ document, columns, pdfPath: path.join(UPLOADS, id, 'document.pdf') }),
+    const result = { ...await extractWithFable({ document, columns, pdfPath: path.join(UPLOADS, id, 'document.pdf'), beforeRequest: guard }),
       completedAt: new Date().toISOString(), elapsedMs: Date.now() - started };
     // Keep the validated result before importing rows so a restart can recover without another paid call.
     await atomicJson(path.join(UPLOADS, id, 'extraction-result.json'), result);
     await mutate(() => completeExtraction(id, result));
   } catch (error) {
-    const safe = error instanceof ExtractionError ? error : new ExtractionError('processing_error', 'Extraction could not be saved or processed. The indexed source was retained; retry explicitly after checking the local setup.');
+    const safe = error instanceof ExtractionError ? error : error instanceof GmailError && error.code === 'connection_changed' ? new ExtractionError('email_import_cancelled', 'Gmail was disconnected before extraction started. The indexed source was retained; start extraction explicitly if needed.') : new ExtractionError('processing_error', 'Extraction could not be saved or processed. The indexed source was retained; retry explicitly after checking the local setup.');
     await mutate(async () => {
       const previous = uploadMetadata.find(x => x.id === id);
       await updateUpload(id, { status: 'extraction_failed', extraction: { ...previous.extraction,
@@ -209,8 +214,9 @@ async function runExtraction(id) {
     });
   } finally { extractionJobs.delete(id); }
 }
-async function startExtraction(id) {
+async function startExtraction(id, guard = () => {}) {
   const outcome = await mutate(async () => {
+    guard();
     const document = await documentById(id);
     if (!document || !uploadMetadata.some(x => x.id === id)) fail(404, 'Only newly uploaded documents can be extracted with Fable.');
     if (document.status === 'extracting' || extractionJobs.has(id)) return { document: metadata(document), start: false };
@@ -231,7 +237,7 @@ async function startExtraction(id) {
   });
   if (outcome.start) {
     // Errors are reflected in document metadata; there are no background retries.
-    const job = runExtraction(id).catch(() => { console.error('Could not persist an extraction failure. The source file is retained.'); });
+    const job = runExtraction(id, guard).catch(() => { console.error('Could not persist an extraction failure. The source file is retained.'); });
     extractionJobs.set(id, job);
   }
   return outcome.document;
@@ -249,7 +255,8 @@ async function existingUploadForHash(sha256) {
   return uploadMetadata.find(d => d.sourceSha256 === sha256 || d.pdfSha256 === sha256) ||
     index.documents.find(d => d.sourceSha256 === sha256 || d.pdfSha256 === sha256);
 }
-async function storeUpload(input, bytes, extension, sha256) {
+async function storeUpload(input, bytes, extension, sha256, guard = () => {}) {
+  guard();
   const duplicate = await existingUploadForHash(sha256);
   if (duplicate) return { ...extractionResponse(metadata(duplicate), true), rows: (await workspace()).rows.filter(row => row.documentId === duplicate.id) };
   const id = `upload-${randomUUID()}`; const folder = path.join(UPLOADS, id);
@@ -260,15 +267,52 @@ async function storeUpload(input, bytes, extension, sha256) {
     const document = await readJson(path.join(folder, 'document.json'), null);
     if (!document) fail(422, 'Document index was not produced.');
     const meta = { ...metadata(document), sourceSha256: sha256, uploadedAt: new Date().toISOString() };
+    guard();
     await mutate(async () => {
+      guard();
       const nextUploads = [...uploadMetadata, meta];
       await atomicJson(path.join(STORAGE, 'uploads.json'), nextUploads); uploadMetadata = nextUploads;
       uploadCache.set(id, document);
       const next = structuredClone(state); next.audit.push({ id: randomUUID(), type: 'document_uploaded', documentId: id, at: meta.uploadedAt, name: meta.sourceFilename });
       await atomicJson(path.join(STORAGE, 'state.json'), next); state = next;
     });
-    return extractionResponse(await startExtraction(id));
+    guard();
+    return extractionResponse(await startExtraction(id, guard));
   } catch (error) { if (!uploadMetadata.some(x => x.id === id)) await fs.rm(folder, { recursive: true, force: true }); throw error; }
+}
+
+async function ingestBytes(input, bytes, extension, guard = () => {}) {
+  const sha256 = createHash('sha256').update(bytes).digest('hex');
+  if (uploadInFlight.has(sha256)) { const same = await uploadInFlight.get(sha256); guard(); return { ...same, duplicate: true }; }
+  guard();
+  const operation = storeUpload(input, bytes, extension, sha256, guard);
+  uploadInFlight.set(sha256, operation);
+  try { return await operation; } finally { uploadInFlight.delete(sha256); }
+}
+function validateFileBytes(bytes, extension) {
+  if (!['.pdf', '.docx'].includes(extension)) fail(415, 'Upload a PDF or DOCX file.');
+  if (!bytes.length || bytes.length > 20 * 1024 * 1024) fail(413, 'File must be between 1 byte and 20 MB.');
+  if (extension === '.pdf' && !bytes.subarray(0, 5).equals(Buffer.from('%PDF-'))) fail(400, 'File is not a PDF.');
+  if (extension === '.docx' && !bytes.subarray(0, 2).equals(Buffer.from('PK'))) fail(400, 'File is not a DOCX archive.');
+}
+async function recordEmailProvenance(documentId, provenance, duplicate, guard) {
+  await mutate(async () => {
+    guard();
+    const existing = emailProvenance[documentId] || [];
+    if (existing.some(source => source.account === provenance.account && source.messageId === provenance.messageId && source.attachmentId === provenance.attachmentId)) return;
+    const source = { ...provenance, importedAt: new Date().toISOString() };
+    const nextProvenance = { ...emailProvenance, [documentId]: [...existing, source] };
+    await atomicJson(path.join(STORAGE, 'email-provenance.json'), nextProvenance); emailProvenance = nextProvenance;
+    const next = structuredClone(state);
+    next.audit.push({ id: randomUUID(), type: 'email_attachment_imported', documentId, at: source.importedAt, source, duplicate });
+    await atomicJson(path.join(STORAGE, 'state.json'), next); state = next;
+  });
+}
+function oauthPage(res, status, heading, message) {
+  const escape = text => String(text).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Role Model · Gmail</title><style>body{font:16px Helvetica,Arial,sans-serif;color:#30272a;max-width:560px;margin:14vh auto;padding:24px;line-height:1.6}h1{font-size:25px;color:#741f34}a{color:#741f34}</style></head><body><h1>${escape(heading)}</h1><p>${escape(message)}</p><p>You can close this tab and return to Role Model.</p><a href="/">Open Role Model</a></body></html>`;
+  res.writeHead(status, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer', 'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'" });
+  res.end(html);
 }
 
 function runUploadHelper(args) {
@@ -318,11 +362,79 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'same-origin');
   try {
-    allowedRequest(req);
     const url = new URL(req.url, `http://127.0.0.1:${PORT}`);
     let pathname;
     try { pathname = decodeURIComponent(url.pathname); }
     catch { fail(400, 'The request path contains invalid URL encoding.'); }
+    allowedRequest(req, pathname);
+    if (req.method === 'GET' && pathname === '/api/email/status') return json(res, 200, gmail.status());
+    if (req.method === 'POST' && pathname === '/api/email/config') {
+      const input = await body(req, 256 * 1024);
+      return json(res, 200, await gmail.configure(input.client ?? input.clientJson ?? input));
+    }
+    if (req.method === 'POST' && pathname === '/api/email/connect') {
+      const input = await body(req);
+      if (input.openBrowser !== undefined && typeof input.openBrowser !== 'boolean') fail(400, 'openBrowser must be boolean.');
+      const { cookie, ...connection } = gmail.connect();
+      res.setHeader('Set-Cookie', cookie);
+      const browserOpened = input.openBrowser === true ? await openSystemBrowser(connection.connectUrl) : false;
+      return json(res, 200, { ...connection, browserOpened });
+    }
+    if (req.method === 'GET' && pathname === '/api/email/authorize') {
+      const handoff = gmail.authorize(url.searchParams.get('ticket'));
+      res.writeHead(302, { Location: handoff.authUrl, 'Set-Cookie': handoff.cookie, 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' });
+      return res.end();
+    }
+    if (req.method === 'GET' && pathname === '/api/email/callback') {
+      try {
+        const result = await gmail.callback(url.searchParams, req.headers.cookie || '');
+        res.setHeader('Set-Cookie', result.cookie);
+        return oauthPage(res, 200, 'Gmail connected', 'Role Model can now list document attachments with read-only access. Choose an attachment in the Email tab to add it to the register.');
+      } catch (error) {
+        const safe = error instanceof GmailError ? error : new GmailError('connection_failed', 'Gmail sign-in could not be completed. Return to Role Model and try again.', 502);
+        return oauthPage(res, safe.status, 'Gmail was not connected', safe.message);
+      }
+    }
+    if (req.method === 'POST' && pathname === '/api/email/disconnect') {
+      const input = await body(req);
+      if (input.revoke !== undefined && typeof input.revoke !== 'boolean') fail(400, 'revoke must be boolean.');
+      return json(res, 200, await gmail.disconnect({ revoke: input.revoke !== false }));
+    }
+    if (req.method === 'GET' && pathname === '/api/email/messages') {
+      return json(res, 200, await gmail.listMessages({ pageToken: url.searchParams.get('pageToken') || undefined }));
+    }
+    if (req.method === 'POST' && pathname === '/api/email/import') {
+      const input = await body(req);
+      if (typeof input.messageId !== 'string' || typeof input.attachmentId !== 'string') fail(400, 'Choose a Gmail message and attachment.');
+      const connection = gmail.status();
+      if (!connection.connected || typeof input.email !== 'string' || input.email.trim().toLowerCase() !== connection.email?.toLowerCase()
+        || !Number.isSafeInteger(input.connectionRevision) || input.connectionRevision !== connection.connectionRevision) {
+        throw new GmailError('connection_changed', 'The displayed Gmail account changed. Refresh the Email tab and select the attachment again.', 409, false);
+      }
+      const epoch = gmail.connectionEpoch();
+      const guard = () => gmail.assertConnection(epoch);
+      guard();
+      const key = `${epoch}:${input.messageId}:${input.attachmentId}`;
+      if (emailImportsInFlight.has(key)) return json(res, 200, { ...await emailImportsInFlight.get(key), duplicate: true });
+      const operation = (async () => {
+        const attachment = await gmail.attachment(input.messageId, input.attachmentId);
+        guard();
+        const extension = path.extname(attachment.filename).toLowerCase();
+        validateFileBytes(attachment.bytes, extension);
+        const result = await ingestBytes({ name: attachment.filename }, attachment.bytes, extension, guard);
+        guard();
+        await recordEmailProvenance(result.document.id, attachment.provenance, result.duplicate, guard);
+        guard();
+        await gmail.recordAdded(attachment.provenance, result.document.id);
+        const currentDocument = metadata(await documentById(result.document.id));
+        return { ...extractionResponse(currentDocument, result.duplicate), rows: result.duplicate ? (await workspace()).rows.filter(row => row.documentId === currentDocument.id) : uploadedRows(currentDocument.id), provenance: attachment.provenance };
+      })();
+      emailImportsInFlight.set(key, operation);
+      try {
+        const result = await operation;
+        return json(res, result.duplicate ? 200 : result.status === 'extracting' ? 202 : 201, result);
+      } finally { emailImportsInFlight.delete(key); }
+    }
     if (req.method === 'GET' && pathname === '/api/workspace') return json(res, 200, await workspace());
     if (req.method === 'GET' && pathname.startsWith('/api/documents/')) {
       const id = pathname.slice('/api/documents/'.length);
@@ -371,17 +483,8 @@ const server = http.createServer(async (req, res) => {
       if (!bytes.length || bytes.length > 20 * 1024 * 1024) fail(413, 'File must be between 1 byte and 20 MB.');
       if (extension === '.pdf' && !bytes.subarray(0, 5).equals(Buffer.from('%PDF-'))) fail(400, 'File is not a PDF.');
       if (extension === '.docx' && !bytes.subarray(0, 2).equals(Buffer.from('PK'))) fail(400, 'File is not a DOCX archive.');
-      const sha256 = createHash('sha256').update(bytes).digest('hex');
-      if (uploadInFlight.has(sha256)) {
-        const same = await uploadInFlight.get(sha256);
-        return json(res, 200, { ...same, duplicate: true });
-      }
-      const operation = storeUpload(input, bytes, extension, sha256);
-      uploadInFlight.set(sha256, operation);
-      try {
-        const result = await operation;
-        return json(res, result.duplicate ? 200 : result.status === 'extracting' ? 202 : 201, result);
-      } finally { uploadInFlight.delete(sha256); }
+      const result = await ingestBytes(input, bytes, extension);
+      return json(res, result.duplicate ? 200 : result.status === 'extracting' ? 202 : 201, result);
     }
     const retryMatch = /^\/api\/documents\/(upload-[a-f0-9-]+)\/extract$/.exec(pathname);
     if (req.method === 'POST' && retryMatch) {
@@ -410,7 +513,7 @@ const server = http.createServer(async (req, res) => {
       const exportPath = path.join(STORAGE, 'exports', `lease-review-${randomUUID()}.xlsx`);
       await exportWorkbook(await workspace(), exportPath);
       const bytes = await fs.readFile(exportPath);
-      res.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="lease-review.xlsx"', 'Content-Length': bytes.length, 'Cache-Control': 'no-store' });
+      res.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="role-model.xlsx"', 'Content-Length': bytes.length, 'Cache-Control': 'no-store' });
       res.end(bytes);
       await fs.unlink(exportPath).catch(() => {});
       return;
@@ -426,8 +529,8 @@ const server = http.createServer(async (req, res) => {
     return await serveFile(req, res, path.join(PUBLIC, asset), PUBLIC);
   } catch (error) {
     if (res.headersSent) return res.destroy();
-    json(res, error.status || 500, { error: error.message || 'Unexpected server error.' });
+    json(res, error.status || 500, { error: error.message || 'Unexpected server error.', ...(error instanceof GmailError ? { code: error.code, retryable: error.retryable } : {}) });
   }
 });
-server.listen(PORT, HOST, () => console.log(`Lease review: http://${HOST}:${PORT}`));
+server.listen(PORT, HOST, () => console.log(`Role Model: http://${HOST}:${PORT}`));
 server.on('error', error => { console.error(error.message); process.exitCode = 1; });

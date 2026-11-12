@@ -1,12 +1,12 @@
 {
-  "name": "folio-lease-review",
+  "name": "role-model-lease-review",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Local lease register with verifiable PDF source evidence",
   "scripts": {
     "start": "node server.mjs",
-    "check": "node --check server.mjs && node --check fable-extractor.mjs && node --check export.mjs && node --check public/app.js && node --check public/pdf-viewer.js && node --check public/viewer.js",
+    "check": "node --check server.mjs && node --check gmail-client.mjs && node --check fable-extractor.mjs && node --check export.mjs && node --check public/app.js && node --check public/pdf-viewer.js && node --check public/viewer.js && node --check public/markdown.js && node --check public/email-tab.js",
     "test": "node --test tests/*.test.mjs",
     "validate:data": "node scripts/validate-baseline.mjs"
   },
@@ -14,6 +14,11 @@
     "node": ">=22"
   },
   "dependencies": {
-    "exceljs": "4.4.0"
+    "dompurify": "3.4.17",
+    "exceljs": "4.4.0",
+    "marked": "18.2.0"
+  },
+  "devDependencies": {
+    "jsdom": "31.0.0"
   }
 }
